@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block contenido %}
+<header class="l-cab">
+  <h1>{{ h1 }}</h1>
+  {% if intro %}<p class="l-intro">{{ intro }}</p>{% endif %}
+  <p class="l-act">Actualizado el {{ actualizado_txt }}.</p>
+</header>
+{% for g in grupos %}
+<section class="bloque">
+  {% if g.titulo %}<h2>{{ g.titulo }}</h2>{% endif %}
+  <ul class="deps">
+    {% for i in g.enlaces %}<li><a href="{{ url(i.path) }}">{{ i.nombre }} <span>{{ miles(i.n) }}</span></a></li>{% endfor %}
+  </ul>
+</section>
+{% endfor %}
+{% endblock %}

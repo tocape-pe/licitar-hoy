@@ -278,7 +278,7 @@ def limpiar(texto: str | None) -> str:
     """Quita el "¿" huérfano que el SEACE deja donde iban comillas o guiones
     ('ADQUISICIÓN DE ¿LECHE EVAPORADA¿', 'LIMA¿ I ETAPA'). Si el texto tiene
     un '?', el '¿' es una pregunta de verdad y se respeta."""
-    t = texto or ""
+    t = (texto or "").replace("\\n", " ")  # algunos traen el salto de línea escrito como texto
     if "¿" in t and "?" not in t:
         t = t.replace("¿", " ")
     return re.sub(r"\s+", " ", t).strip(" ,;:-")

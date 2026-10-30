@@ -107,3 +107,5 @@ def test_construye_sitio_completo(tmp_path):
     assert "contratacionesabiertas.oece.gob.pe/proceso/ocds-dgv273-seacev3-1261357" in html
     cerrado = next((pub / "licitacion").glob("*1259973/index.html")).read_text(encoding="utf-8")
     assert 'content="noindex' in cerrado and '"@type":"Demand"' not in cerrado
+    for indice in ("departamento", "rubro", "entidad", "objeto", "monto"):  # las migas no llevan a un 404
+        assert (pub / indice / "index.html").exists()

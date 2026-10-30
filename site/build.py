@@ -446,10 +446,13 @@ def titulo_aviso(a: dict, limite: int = 70) -> str:
     """'Licitación de [qué] – [entidad] – [departamento]'; si no cabe, se
     sacrifica primero el departamento y luego se acorta el qué."""
     que = a["corta"]
+    sitio_que = limite - len(f"Licitación de  – {a['entidad_txt']}")
     for t in (f"Licitación de {que} – {a['entidad_txt']} – {a['dep_txt']}",
               f"Licitación de {que} – {a['entidad_txt']}",
-              f"Licitación de {T.descripcion_corta(a['descripcion'], 35)} – {a['entidad_txt']}"):
-        if len(t) <= limite:
+              f"Licitación de {T.descripcion_corta(a['descripcion'], 35)} – {a['entidad_txt']}",
+              f"Licitación de {T.descripcion_corta(a['descripcion'], sitio_que)} – {a['entidad_txt']}"
+              if sitio_que >= 20 else ""):
+        if t and len(t) <= limite:
             return t
     return cortar(f"Licitación de {que} – {a['entidad_txt']}", limite)
 
@@ -532,9 +535,9 @@ def construir(sitio: Sitio, out: Path) -> None:
     # Portada
     r_all = sitio.resumen(sitio.vigentes)
     escribir("/", "portada.html", True, sitio.vigentes[0]["lastmod"] if sitio.vigentes else None,
-             titulo=f"Licitaciones del Estado peruano hoy {sitio.anio}: obras, bienes y servicios | {MARCA}",
+             titulo=f"Licitaciones SEACE hoy {sitio.anio}: obras, bienes y servicios | {MARCA}",
              descripcion=armar([f"{plural(len(sitio.vigentes), 'licitación vigente', 'licitaciones vigentes')} "
-                                "del Estado peruano para pymes y proveedores, ordenadas por fecha límite de consultas.",
+                                "publicadas en el SEACE, para pymes y proveedores, ordenadas por fecha límite de consultas.",
                                 f"Datos abiertos del OECE al {hoy_txt}."]),
              h1="Licitaciones del Estado peruano para tu empresa",
              semana=semana[:PORTADA_ULTIMAS], n_semana=len(semana), resumen=r_all,
@@ -546,7 +549,17 @@ def construir(sitio: Sitio, out: Path) -> None:
     # Avisos (vigentes indexables; cerrados con noindex y sin datos estructurados).
     # Misma entidad y misma descripción en varios procedimientos: el título lleva
     # la nomenclatura para que cada página sea distinta.
+    def desempate(a: dict) -> str:
+        """' (N.° 23-2026)': el número corto del procedimiento; la nomenclatura completa no deja
+        sitio para la entidad."""
+        m = re.search(r"-(\d+)-(20\d\d)-", a["nomenclatura"])
+        return f" (N.° {m[1]}-{m[2]})" if m else f" ({a['nomenclatura']})"
+
+    def titulo_repetido(a: dict, sufijo: str) -> str:
+        return titulo_aviso(a, 70 - len(sufijo)) + sufijo
+
     repetidos = Counter(titulo_aviso(a) for a in sitio.vigentes)
+    aun_repetidos = Counter(titulo_repetido(a, desempate(a)) for a in sitio.vigentes if repetidos[titulo_aviso(a)] > 1)
     for a in sitio.vigentes + sitio.cerrados:
         idx_ent = sitio.entidad_indexable.get(a["entidad_slug"], False)
         migas = [("Inicio", "/"), (a["dep_txt"], f"/departamento/{a['dep_slug']}/")]
@@ -557,11 +570,14 @@ def construir(sitio: Sitio, out: Path) -> None:
         if a["cerrado"]:
             titulo = cortar(f"{a['nomenclatura']} – {a['entidad_txt']} ({(a['estado'] or 'cerrado').lower()})", 70)
         elif repetidos[titulo_aviso(a)] > 1:
-            titulo = cortar(f"{a['nomenclatura']}: licitación de {a['corta']} – {a['entidad_txt']}", 70)
+            # Lo que la gente busca va primero; el número al final solo desempata.
+            titulo = titulo_repetido(a, desempate(a))
+            if aun_repetidos[titulo] > 1:
+                titulo = titulo_repetido(a, f" ({a['nomenclatura']})")
         else:
             titulo = elegir(titulo_aviso(a))
         frases = [f"{a['tipo'] or 'Procedimiento'} {a['nomenclatura']} {de_articulo(a['entidad_txt'])} "
-                  f"({a['dep_txt']}).",
+                  f"({a['dep_txt']}), publicado en el SEACE.",
                   f"Monto: {a['monto_txt']}." if a["monto_txt"] else "",
                   f"Consultas hasta el {fecha_corta(a['consultas_fin'])}." if a["dias"] is not None and a["dias"] >= 0 else "",
                   cortar(a["descripcion_txt"], 120)]
@@ -579,9 +595,11 @@ def construir(sitio: Sitio, out: Path) -> None:
                 elegir(f"{o['titulo']} del Estado {sitio.anio}: {plural(r['n'], 'vigente', 'vigentes')}",
                        f"{o['titulo']} del Estado {sitio.anio}"),
                 f"{o['titulo']} del Estado {sitio.anio}",
-                armar([f"{plural(r['n'], 'convocatoria vigente', 'convocatorias vigentes')}.", o["intro"],
-                       f"Actualizado el {hoy_txt}."]),
-                [("Inicio", "/"), (o["titulo"], None)], intro=o["intro"], extra={"tipo": "objeto"})
+                armar([f"{plural(r['n'], 'convocatoria vigente', 'convocatorias vigentes')} en el SEACE"
+                       + (f", por un total publicado de {r['suma_txt']}." if r["suma_txt"] else "."),
+                       f"{plural(r['semana'], 'cierra', 'cierran')} consultas esta semana." if r["semana"] else "",
+                       o["intro"], f"Actualizado el {hoy_txt}."]),
+                [("Inicio", "/"), ("Tipos", "/objeto/"), (o["titulo"], None)], intro=o["intro"], extra={"tipo": "objeto"})
 
     # Rubro
     for rb in rubros:
@@ -592,9 +610,10 @@ def construir(sitio: Sitio, out: Path) -> None:
                        f"Licitaciones de {rb['nombre'].lower()} {sitio.anio}"),
                 f"Licitaciones de {rb['nombre'].lower()}",
                 armar([f"{plural(r['n'], 'licitación vigente', 'licitaciones vigentes')} del Estado peruano en "
-                       f"{rb['nombre'].lower()}.", "Clasificadas con los códigos UNSPSC de cada ítem.",
-                       f"Actualizado el {hoy_txt}."]),
-                [("Inicio", "/"), (rb["nombre"], None)],
+                       f"{rb['nombre'].lower()}" + (f", por {r['suma_txt']} publicados." if r["suma_txt"] else "."),
+                       f"{plural(r['semana'], 'cierra', 'cierran')} consultas esta semana." if r["semana"] else "",
+                       "Clasificadas con los códigos UNSPSC de cada ítem.", f"Actualizado el {hoy_txt}."]),
+                [("Inicio", "/"), ("Rubros", "/rubro/"), (rb["nombre"], None)],
                 intro="Agrupadas por el código de catálogo (UNSPSC) que la entidad le puso a cada ítem.",
                 extra={"tipo": "rubro"})
 
@@ -603,14 +622,15 @@ def construir(sitio: Sitio, out: Path) -> None:
         avisos = sitio.por_dep[d["slug"]]
         r = sitio.resumen(avisos)
         listado(d["path"], avisos, True,
-                elegir(f"Licitaciones en {d['nombre']} {sitio.anio}: {plural(r['n'], 'vigente', 'vigentes')}",
+                elegir(f"Licitaciones SEACE en {d['nombre']} {sitio.anio}: {plural(r['n'], 'vigente', 'vigentes')}",
+                       f"Licitaciones en {d['nombre']} {sitio.anio}: {plural(r['n'], 'vigente', 'vigentes')}",
                        f"Licitaciones en {d['nombre']} {sitio.anio}"),
                 f"Licitaciones del Estado en {d['nombre']}",
                 armar([f"{plural(r['n'], 'licitación vigente', 'licitaciones vigentes')} de entidades públicas "
                        f"de {d['nombre']}" + (f", por un total publicado de {r['suma_txt']}." if r["suma_txt"] else "."),
                        f"{plural(r['semana'], 'cierra', 'cierran')} consultas esta semana." if r["semana"] else "",
                        f"Actualizado el {hoy_txt}."]),
-                [("Inicio", "/"), (d["nombre"], None)],
+                [("Inicio", "/"), ("Departamentos", "/departamento/"), (d["nombre"], None)],
                 intro=f"Convocadas por entidades con sede en {d['nombre']}. El lugar de ejecución puede ser otro: "
                       "revisa la descripción de cada una.",
                 extra={"tipo": "departamento"})
@@ -624,7 +644,8 @@ def construir(sitio: Sitio, out: Path) -> None:
                 elegir(f"Licitaciones de {nombre} {sitio.anio}", f"Licitaciones {nombre}"),
                 f"Licitaciones {de_articulo(nombre)}",
                 armar([f"{plural(r['n'], 'licitación vigente', 'licitaciones vigentes')} {de_articulo(nombre)} "
-                       f"({dep['dep_txt']}).", f"Monto publicado: {r['suma_txt']}." if r["suma_txt"] else "",
+                       f"({dep['dep_txt']}) en el SEACE.", f"Monto publicado: {r['suma_txt']}." if r["suma_txt"] else "",
+                       f"{plural(r['semana'], 'cierra', 'cierran')} consultas esta semana." if r["semana"] else "",
                        f"Actualizado el {hoy_txt}."]),
                 [("Inicio", "/"), (dep["dep_txt"], f"/departamento/{dep['dep_slug']}/"), (nombre, None)],
                 extra={"tipo": "entidad"})
@@ -638,10 +659,47 @@ def construir(sitio: Sitio, out: Path) -> None:
                 armar([f"{plural(len(avisos), 'licitación vigente', 'licitaciones vigentes')} con monto "
                        f"{rg['nombre'].lower()}.", "Solo las que publican su monto: muchas no lo hacen.",
                        f"Actualizado el {hoy_txt}."]),
-                [("Inicio", "/"), (rg["nombre"], None)],
+                [("Inicio", "/"), ("Montos", "/monto/"), (rg["nombre"], None)],
                 intro="Solo aparecen las licitaciones que publican su monto en los datos abiertos; "
                       "muchas de bienes y servicios no lo hacen.",
                 extra={"tipo": "monto"})
+
+    # Índices de cada agrupación: /departamento/, /rubro/, /entidad/, /objeto/, /monto/
+    def directorio(path: str, h1: str, titulo: str, descripcion: str, grupos: list[dict], intro: str = ""):
+        escribir(path, "directorio.html", True, None, titulo=con_marca(titulo), h1=h1, descripcion=descripcion,
+                 intro=intro, grupos=grupos, migas=[("Inicio", "/"), (h1, None)],
+                 ld=[sitio.breadcrumbs([("Inicio", "/"), (h1, None)])])
+
+    directorio("/departamento/", "Licitaciones por departamento", f"Licitaciones SEACE por departamento {sitio.anio}",
+               armar([f"Licitaciones vigentes del Estado en los {len(departamentos)} departamentos del Perú, "
+                      "según la sede de la entidad.", f"Actualizado el {hoy_txt}."]),
+               [{"titulo": "", "enlaces": departamentos}])
+    directorio("/rubro/", "Licitaciones por rubro", f"Licitaciones del Estado por rubro {sitio.anio}",
+               armar(["Licitaciones vigentes agrupadas por rubro: construcción, salud, alimentos, tecnología y más.",
+                      f"Actualizado el {hoy_txt}."]),
+               [{"titulo": "", "enlaces": rubros}],
+               intro="Según el código de catálogo (UNSPSC) que la entidad le puso a cada ítem; una licitación "
+                     "puede estar en más de un rubro.")
+    directorio("/objeto/", "Licitaciones por tipo de contratación", f"Licitaciones de obras, bienes y servicios {sitio.anio}",
+               armar(["Licitaciones vigentes del Estado peruano separadas en obras, bienes, servicios y consultorías.",
+                      f"Actualizado el {hoy_txt}."]),
+               [{"titulo": "", "enlaces": [o for o in objetos if o["n"]]}])
+    directorio("/monto/", "Licitaciones por monto", f"Licitaciones del Estado por monto {sitio.anio}",
+               armar(["Licitaciones vigentes agrupadas por el monto que publican en los datos abiertos.",
+                      f"Actualizado el {hoy_txt}."]),
+               [{"titulo": "", "enlaces": rangos}],
+               intro="Solo aparecen las que publican su monto; muchas de bienes y servicios no lo hacen.")
+    por_dep_ent: dict[str, list[dict]] = {}
+    for s, avisos in sitio.por_entidad.items():
+        if sitio.entidad_indexable[s]:
+            por_dep_ent.setdefault(avisos[0]["dep_txt"], []).append(
+                {"nombre": avisos[0]["entidad_txt"], "path": f"/entidad/{s}/", "n": len(avisos)})
+    directorio("/entidad/", "Licitaciones por entidad", f"Entidades públicas con licitaciones vigentes {sitio.anio}",
+               armar([f"{plural(sum(len(v) for v in por_dep_ent.values()), 'entidad', 'entidades')} del Estado con "
+                      "varias licitaciones vigentes: municipalidades, gobiernos regionales, hospitales y más.",
+                      f"Actualizado el {hoy_txt}."]),
+               [{"titulo": dep, "enlaces": sorted(v, key=lambda e: e["nombre"])} for dep, v in sorted(por_dep_ent.items())],
+               intro=f"Entidades con {UMBRAL_ENTIDAD} o más licitaciones vigentes, agrupadas por departamento.")
 
     # Esta semana
     listado("/esta-semana/", semana, True,
