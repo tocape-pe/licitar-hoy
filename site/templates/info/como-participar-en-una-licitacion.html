@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block contenido %}
+<article class="texto">
+<h1>{{ h1 }}</h1>
+<p>Cada día municipalidades, gobiernos regionales, hospitales y ministerios convocan licitaciones, concursos y subastas para comprar bienes, contratar servicios o hacer obras. Muchas son de montos que una pequeña empresa puede atender. Esta guía resume el camino, desde encontrar una oportunidad hasta firmar el contrato, para que sepas qué viene en cada paso.</p>
+
+<h2>1. Ten listo lo básico</h2>
+<ul>
+  <li><strong>Inscripción vigente en el RNP</strong> en el registro que corresponde a lo que ofreces. Si aún no la tienes, mira <a href="{{ url('/como-inscribirse-en-el-rnp/') }}">cómo inscribirse en el RNP</a>.</li>
+  <li><strong>Acceso al SEACE</strong> como proveedor: ahí te registras en cada procedimiento y presentas tu oferta.</li>
+  <li><strong>Tus documentos en orden:</strong> RUC, vigencia de poder del representante (si eres empresa), y lo que acredite tu experiencia, como contratos, órdenes de compra o facturas de ventas parecidas.</li>
+</ul>
+
+<h2>2. Encuentra licitaciones que puedas atender</h2>
+<p>Busca por lo que vendes y por dónde puedes entregar. En {{ marca }} las licitaciones vigentes están ordenadas por la fecha límite de consultas y puedes verlas <a href="{{ url('/rubro/') }}">por rubro</a>, <a href="{{ url('/departamento/') }}">por departamento</a>, <a href="{{ url('/monto/') }}">por monto</a> o <a href="{{ url('/esta-semana/') }}">las que cierran consultas esta semana</a>. Antes de entusiasmarte, revisa tres cosas:</p>
+<ul>
+  <li><strong>El lugar de entrega o ejecución,</strong> que puede ser distinto de la sede de la entidad.</li>
+  <li><strong>El plazo de entrega,</strong> y si puedes cumplirlo con tu capacidad real.</li>
+  <li><strong>La experiencia que piden.</strong> Muchas bases exigen haber facturado un monto mínimo en ventas parecidas.</li>
+</ul>
+
+<h2>3. Descarga y lee las bases</h2>
+<p>Las bases son las reglas del procedimiento: qué se compra exactamente (especificaciones técnicas o términos de referencia), qué documentos se presentan, cómo se evalúa y el cronograma. Están en la ficha oficial del SEACE, a la que enlaza cada aviso de {{ marca }}. Lee primero los requisitos de calificación y las causales para no admitir una oferta: si no puedes cumplir uno, no vale la pena seguir.</p>
+
+<h2>4. Regístrate como participante a tiempo</h2>
+<p>Para presentar una oferta tienes que <strong>registrarte como participante</strong> en ese procedimiento, en el SEACE y dentro del plazo del cronograma. El registro es gratuito. Si no te registras a tiempo, no podrás ofertar aunque cumplas todo lo demás.</p>
+
+<h2>5. Haz consultas si algo no está claro</h2>
+<p>En la etapa de <strong>consultas y observaciones</strong> los participantes pueden preguntar o pedir que se corrija algo de las bases: una especificación que solo cumple una marca, un plazo imposible o un requisito desproporcionado. Las respuestas se publican y pasan a formar parte de las <strong>bases integradas</strong>, que son las reglas definitivas. Esa es la fecha límite que mostramos en cada aviso. Más detalle en <a href="{{ url('/etapas-de-una-licitacion/') }}">las etapas de una licitación</a>.</p>
+
+<h2>6. Prepara y presenta tu oferta</h2>
+<p>Arma la oferta según las <strong>bases integradas</strong>, no según la primera versión. Por lo general incluye los documentos para la admisión (declaraciones juradas y anexos firmados), los que acreditan los requisitos de calificación y tu precio. Se presenta de forma electrónica en el SEACE, antes de la fecha y hora del cronograma. Sube los archivos con tiempo: el sistema no acepta nada fuera de plazo.</p>
+
+<h2>7. Evaluación, buena pro y contrato</h2>
+<p>Los evaluadores revisan si tu oferta se admite, la califican y la puntúan. El resultado se publica en el SEACE con el <strong>otorgamiento de la buena pro</strong>. Si ganas y nadie la cuestiona en el plazo, la buena pro queda consentida y te piden los documentos para firmar el contrato, incluidas las garantías que indiquen las bases. Si no ganas, revisa el cuadro de evaluación: te dice en qué perdiste puntos para la próxima.</p>
+
+<h2>Consejos para pymes</h2>
+<ul>
+  <li><strong>Empieza por montos chicos</strong> y de tu propio departamento: ganas experiencia acreditable para competir por contratos más grandes.</li>
+  <li><strong>Considera un consorcio</strong> con otra empresa si te falta experiencia o capacidad; las bases dicen si está permitido y con qué condiciones.</li>
+  <li><strong>Calcula bien tu precio:</strong> incluye transporte, impuestos, garantías y el tiempo que puede tardar el pago.</li>
+  <li><strong>Desconfía</strong> de quien te ofrezca «asegurar» una buena pro a cambio de dinero.</li>
+</ul>
+<p class="nota">Guía informativa revisada el {{ fecha_larga(revisado) }}. Los pasos y plazos exactos de cada procedimiento están en sus bases y en su cronograma oficial. {{ marca }} no es el OECE ni una entidad del Estado.</p>
+</article>
+{% endblock %}

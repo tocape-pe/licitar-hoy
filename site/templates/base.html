@@ -17,7 +17,9 @@
 <meta property="og:title" content="{{ h1 }}">
 {% if descripcion %}<meta property="og:description" content="{{ descripcion }}">{% endif %}
 <meta property="og:url" content="{{ canonical }}">
+<meta name="google-adsense-account" content="{{ adsense }}">
 <style>{{ css | safe }}</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ adsense }}" crossorigin="anonymous"></script>
 {% for bloque in ld %}<script type="application/ld+json">{{ ld_json(bloque) | safe }}</script>
 {% endfor %}
 <!-- Visitas anónimas, sin cookies (GoatCounter) -->
@@ -59,6 +61,8 @@
     <p class="pie-links">{% for r in rangos %}{{ ' · ' if not loop.first }}<a href="{{ url(r.path) }}">{{ r.nombre }}</a>{% endfor %}</p>
     <p class="pie-links"><a href="{{ url('/entidad/') }}">Todas las entidades</a> · <a href="{{ url('/departamento/') }}">Todos los departamentos</a> · <a href="{{ url('/rubro/') }}">Todos los rubros</a></p>
     <p class="pie-fuente">Datos del <a href="{{ fuente_url }}" rel="noopener">{{ fuente }}</a> (licencia <a href="{{ licencia_url }}" rel="noopener license">CC BY 4.0</a>), procesados por {{ marca }} y actualizados el {{ actualizado_txt }}. {{ marca }} no es el OECE ni una entidad del Estado, no cobra y no pide datos personales. Verifica siempre en la ficha oficial.</p>
+    <h2 class="pie-titulo">Guías para proveedores</h2>
+    <p class="pie-links">{% for g in guias %}{{ ' · ' if not loop.first }}<a href="{{ url('/' ~ g.slug ~ '/') }}">{{ g.h1 }}</a>{% endfor %}</p>
     <p class="pie-links"><a href="{{ url('/acerca/') }}">Acerca</a> · <a href="{{ url('/aviso-legal/') }}">Aviso legal</a> · <a href="{{ url('/privacidad/') }}">Privacidad</a> · <a href="https://chambearhoy.toca.pe/">Trabajos en el Estado (Chamba al Toque)</a></p>
     <p><a class="pie-contacto" href="https://toca.pe/#contacto">Contacto</a></p>
   </div>

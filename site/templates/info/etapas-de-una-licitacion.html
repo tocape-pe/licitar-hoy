@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block contenido %}
+<article class="texto">
+<h1>{{ h1 }}</h1>
+<p>Una licitación del Estado no se resuelve en un día: pasa por varias etapas, cada una con su fecha en el cronograma. Saber qué significa cada una te ayuda a no perderte un plazo. Esta es la secuencia general de un procedimiento de selección; los nombres y plazos exactos dependen del tipo de procedimiento (licitación pública, concurso público, subasta inversa electrónica, comparación de precios…) y siempre están en sus bases.</p>
+
+<h2>1. Convocatoria</h2>
+<p>La entidad publica el procedimiento en el SEACE con sus bases y su cronograma. Desde ese momento cualquier proveedor puede verlo. Es la fecha de publicación que mostramos en cada aviso de {{ marca }}.</p>
+
+<h2>2. Registro de participantes</h2>
+<p>Los proveedores interesados se registran en el procedimiento a través del SEACE. Es gratuito y es obligatorio para poder presentar una oferta. Necesitas tener vigente tu inscripción en el <a href="{{ url('/como-inscribirse-en-el-rnp/') }}">RNP</a>.</p>
+
+<h2>3. Consultas y observaciones a las bases</h2>
+<p>Los participantes pueden <strong>preguntar</strong> sobre algo que no está claro o <strong>observar</strong> algo que creen que limita la competencia o va contra las normas. Es la primera fecha límite importante: lo que no preguntes u observes aquí, después ya no se puede cambiar. En {{ marca }} es la fecha que usamos para ordenar los avisos, porque es la que viene en los datos abiertos del OECE.</p>
+
+<h2>4. Absolución e integración de las bases</h2>
+<p>La entidad responde las consultas y observaciones en un pliego que se publica en el SEACE. Con esas respuestas arma las <strong>bases integradas</strong>: la versión definitiva de las reglas. Tu oferta se prepara y se evalúa según las bases integradas, no según la primera versión.</p>
+
+<h2>5. Presentación de ofertas</h2>
+<p>Los participantes envían su oferta de forma electrónica por el SEACE, hasta la fecha y hora indicadas. En la subasta inversa electrónica, además, hay un periodo de lances en el que los postores bajan su precio en línea.</p>
+
+<h2>6. Admisión, evaluación y calificación</h2>
+<p>Los evaluadores revisan si cada oferta tiene los documentos obligatorios (admisión), le asignan un puntaje según los factores de las bases (evaluación) y verifican que el postor cumpla los requisitos de calificación, como la experiencia mínima. Todo queda en un cuadro que se publica.</p>
+
+<h2>7. Otorgamiento de la buena pro</h2>
+<p>La entidad publica en el SEACE quién ganó. Los demás postores pueden cuestionar el resultado dentro del plazo que señala la norma. Si no hay cuestionamientos, o cuando se resuelven, la buena pro queda <strong>consentida</strong>. Si ninguna oferta resulta válida, el procedimiento se declara <strong>desierto</strong> y la entidad puede volver a convocarlo.</p>
+
+<h2>8. Firma del contrato</h2>
+<p>El ganador presenta los documentos que piden las bases para el perfeccionamiento del contrato, como las garantías cuando corresponden, y firma. A partir de ahí empieza la ejecución: entregas, servicios o la obra, con sus conformidades y pagos.</p>
+
+<h2>Qué fechas encontrarás en {{ marca }}</h2>
+<p>Los datos abiertos del OECE traen la fecha de convocatoria y el plazo de consultas, pero <strong>no</strong> las fechas de presentación de ofertas ni de buena pro. Por eso cada aviso enlaza a su ficha oficial, donde está el cronograma completo. Si estás interesado en una licitación, entra a la ficha, descarga las bases y anota todas las fechas.</p>
+<p>¿Listo para buscar? Mira <a href="{{ url('/esta-semana/') }}">las licitaciones que cierran consultas esta semana</a> o lee <a href="{{ url('/como-participar-en-una-licitacion/') }}">cómo participar en una licitación siendo pyme</a>.</p>
+<p class="nota">Guía informativa revisada el {{ fecha_larga(revisado) }}. Resume la secuencia general de la Ley N.° 32069, Ley General de Contrataciones Públicas, y su reglamento; ante cualquier duda vale lo que dicen la norma y las bases de cada procedimiento.</p>
+</article>
+{% endblock %}

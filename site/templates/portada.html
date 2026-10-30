@@ -20,6 +20,13 @@
 </section>
 
 <section class="bloque">
+  <h2>¿Primera vez vendiéndole al Estado?</h2>
+  <ul class="deps">
+    {% for g in guias %}<li><a href="{{ url('/' ~ g.slug ~ '/') }}">{{ g.h1 }}</a></li>{% endfor %}
+  </ul>
+</section>
+
+<section class="bloque">
   <h2>Por rubro</h2>
   <ul class="deps">
     {% for r in rubros %}<li><a href="{{ url(r.path) }}">{{ r.nombre }} <span>{{ miles(r.n) }}</span></a></li>{% endfor %}

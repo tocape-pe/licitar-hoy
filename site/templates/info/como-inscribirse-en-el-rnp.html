@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block contenido %}
+<article class="texto">
+<h1>{{ h1 }}</h1>
+<p>Para venderle al Estado peruano casi siempre necesitas estar inscrito en el <strong>Registro Nacional de Proveedores (RNP)</strong>. Es el registro que lleva el OECE (antes OSCE) con todas las personas y empresas habilitadas para participar en procedimientos de selección y firmar contratos con entidades públicas. Esta guía explica qué es, qué necesitas antes de empezar y cómo es el trámite, en palabras simples.</p>
+
+<h2>1. Elige en qué registro te inscribes</h2>
+<p>El RNP tiene registros separados según lo que vas a ofrecer:</p>
+<ul>
+  <li><strong>Proveedor de bienes:</strong> si vendes productos (útiles, alimentos, combustible, equipos, uniformes…).</li>
+  <li><strong>Proveedor de servicios:</strong> si prestas servicios (limpieza, vigilancia, transporte, mantenimiento, consultorías en general…).</li>
+  <li><strong>Ejecutor de obras:</strong> si construyes (pistas, colegios, redes de agua…).</li>
+  <li><strong>Consultor de obras:</strong> si elaboras expedientes técnicos o supervisas obras.</li>
+</ul>
+<p>Bienes y servicios son los trámites más sencillos y los que suelen usar las pymes y las personas naturales con negocio. Los registros de obras piden además acreditar experiencia y personal, y la evaluación es más larga. Puedes inscribirte en más de un registro.</p>
+
+<h2>2. Lo que necesitas antes de empezar</h2>
+<ul>
+  <li><strong>RUC activo y habido</strong> en la SUNAT. Si tu RUC está suspendido o «no habido», el trámite no avanza.</li>
+  <li>No tener una <strong>sanción vigente</strong> de inhabilitación para contratar con el Estado.</li>
+  <li>Tus datos al día en la SUNAT (domicilio fiscal, representante legal y socios, si eres empresa), porque el RNP los cruza.</li>
+  <li>Un medio de pago para la <strong>tasa del trámite</strong>. El monto depende de si eres persona natural o jurídica y del registro; revísalo en la ficha oficial del trámite antes de pagar, porque cambia.</li>
+</ul>
+
+<h2>3. Cómo es el trámite de bienes o servicios</h2>
+<ol>
+  <li><strong>Paga la tasa</strong> por el canal que indica la ficha oficial (por ejemplo, Págalo.pe del Banco de la Nación). Guarda el comprobante: lo vas a necesitar.</li>
+  <li><strong>Entra al portal del RNP</strong> y llena el formulario electrónico de inscripción con los datos del pago.</li>
+  <li><strong>Revisa y envía.</strong> Para personas naturales la aprobación suele ser automática al enviar el formulario; para empresas, el OECE revisa la información y puede pedirte correcciones.</li>
+  <li><strong>Descarga tu constancia</strong> de inscripción. Desde ahí puedes acceder al SEACE como proveedor para registrarte en los procedimientos que te interesen.</li>
+</ol>
+<p>Los pasos, montos y plazos exactos están en <a href="https://www.gob.pe/22007-inscribirme-en-el-registro-nacional-de-proveedores-rnp-como-proveedor-de-servicios" rel="noopener">la ficha oficial del trámite en gob.pe</a> y en el portal del RNP. Si algo de esta guía no coincide con lo que dice el OECE, vale lo que dice el OECE.</p>
+
+<h2>4. Después de inscribirte</h2>
+<ul>
+  <li><strong>Mantén tus datos actualizados.</strong> Si cambias de domicilio, de representante o de socios, actualízalo en el RNP; un dato desfasado puede traerte problemas al firmar un contrato.</li>
+  <li><strong>Inscribirte no te inscribe en ninguna licitación.</strong> Para cada procedimiento tienes que registrarte como participante en el SEACE, dentro del plazo de su cronograma. Lo explicamos en <a href="{{ url('/como-participar-en-una-licitacion/') }}">cómo participar en una licitación</a>.</li>
+  <li><strong>Busca oportunidades de tu rubro.</strong> En {{ marca }} puedes filtrar las licitaciones vigentes <a href="{{ url('/rubro/') }}">por rubro</a> y <a href="{{ url('/departamento/') }}">por departamento</a>.</li>
+</ul>
+
+<h2>Errores comunes</h2>
+<ul>
+  <li>Pagar la tasa de un registro distinto al que necesitas (bienes en lugar de servicios, o persona jurídica en lugar de natural).</li>
+  <li>Empezar el trámite con el RUC «no habido» o con datos desactualizados en la SUNAT.</li>
+  <li>Esperar a ver una licitación interesante para recién inscribirse: el plazo para registrarte como participante puede cerrarse antes de que termines.</li>
+  <li>Pagarle a un tercero por «asegurarte» la inscripción o una buena pro. El trámite lo haces tú y nadie puede garantizarte un contrato.</li>
+</ul>
+<p class="nota">Guía informativa revisada el {{ fecha_larga(revisado) }}. {{ marca }} no es el OECE ni hace trámites por ti.</p>
+</article>
+{% endblock %}

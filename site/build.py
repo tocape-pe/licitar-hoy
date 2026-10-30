@@ -107,9 +107,24 @@ INFO = [
      "desc": f"Datos abiertos del OECE con licencia CC BY 4.0. {MARCA} no es una entidad del Estado, "
              "no cobra y no intermedia en las contrataciones."},
     {"slug": "privacidad", "title": f"Privacidad | {MARCA}", "h1": "Privacidad", "indexable": False,
-     "lastmod": "2026-10-29",
-     "desc": f"{MARCA} no pide datos personales. Visitas contadas sin cookies."},
+     "lastmod": "2026-10-30",
+     "desc": f"{MARCA} no pide datos personales. Anuncios de Google AdSense y visitas contadas sin cookies."},
+    # Guías propias para proveedores (enlazadas desde la portada y el pie)
+    {"slug": "como-inscribirse-en-el-rnp", "title": "Cómo inscribirse en el RNP: guía para proveedores del Estado",
+     "h1": "Cómo inscribirse en el RNP para venderle al Estado", "indexable": True, "lastmod": "2026-10-30",
+     "desc": "Qué es el Registro Nacional de Proveedores, qué registro te toca (bienes, servicios u obras), "
+             "qué necesitas antes de empezar y cómo es el trámite, paso a paso."},
+    {"slug": "como-participar-en-una-licitacion", "title": "Cómo participar en una licitación del Estado siendo pyme",
+     "h1": "Cómo participar en una licitación del Estado siendo pyme", "indexable": True, "lastmod": "2026-10-30",
+     "desc": "De encontrar la licitación a firmar el contrato: RNP, bases, registro de participantes, consultas, "
+             "oferta en el SEACE y buena pro, con consejos para pequeñas empresas."},
+    {"slug": "etapas-de-una-licitacion", "title": "Etapas de una licitación: consultas, bases integradas y buena pro",
+     "h1": "Etapas de una licitación del Estado, explicadas", "indexable": True, "lastmod": "2026-10-30",
+     "desc": "Qué significa cada etapa de un procedimiento de selección: convocatoria, registro de participantes, "
+             "consultas y observaciones, integración de bases, ofertas, evaluación y buena pro."},
 ]
+GUIAS = [p for p in INFO if p["slug"].startswith(("como-", "etapas-"))]
+ADSENSE = "ca-pub-6522291453297769"  # anuncios automáticos de AdSense (cuenta del dominio toca.pe)
 
 
 # ---------------------------------------------------------------- formato
@@ -473,6 +488,7 @@ def construir(sitio: Sitio, out: Path) -> None:
     env.globals.update(
         url=sitio.url, abs=sitio.abs, anio=sitio.anio, ld_json=ld_json, miles=miles, plural=plural,
         fecha_larga=fecha_larga, fecha_corta=fecha_corta, soles=soles, departamentos=departamentos,
+        adsense=ADSENSE, guias=GUIAS,
         objetos=objetos, rubros=rubros, rangos=rangos, css=css, contacto=CONTACTO, marca=MARCA,
         fuente=FUENTE, fuente_url=FUENTE_URL, licencia_url=LICENCIA_URL, seace_url=SEACE_URL,
         hoy=sitio.hoy.isoformat(),
@@ -716,8 +732,8 @@ def construir(sitio: Sitio, out: Path) -> None:
     # Páginas informativas
     for p in INFO:
         escribir(f"/{p['slug']}/", f"info/{p['slug']}.html", p["indexable"], p["lastmod"],
-                 titulo=p["title"], h1=p["h1"], descripcion=p["desc"],
-                 migas=[("Inicio", "/"), (p["h1"], None)], ld=[])
+                 titulo=p["title"], h1=p["h1"], descripcion=p["desc"], revisado=p["lastmod"],
+                 migas=[("Inicio", "/"), (p["h1"], None)], ld=[sitio.breadcrumbs([("Inicio", "/"), (p["h1"], None)])])
 
     # 404 (GitHub Pages la sirve desde la raíz del proyecto)
     html = env.get_template("404.html").render(path="/404.html", canonical=sitio.abs("/404.html"), indexable=False,

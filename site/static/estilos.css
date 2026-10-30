@@ -144,7 +144,9 @@ main{padding-bottom:32px}
 .texto{max-width:42rem;padding-top:20px}
 .texto h1{margin-bottom:12px}
 .texto h2{margin:24px 0 8px}
-.texto ul{margin:0 0 12px 1.2em}
+.texto ul,.texto ol{margin:0 0 12px 1.2em}
+.texto p{margin:0 0 12px}
+.texto .nota{margin-top:24px;padding-top:12px;border-top:1px solid var(--linea);color:var(--mute);font-size:.9rem}
 .texto li{margin:6px 0}
 
 .pie{margin-top:24px;padding:24px 0 32px;background:var(--cab);color:#e6ebf3;font-size:.9rem}
