@@ -43,6 +43,7 @@ SEACE_URL = "https://prod2.seace.gob.pe/seacebus-uiwd-pub/buscadorPublico/buscad
 POR_PAGINA = 25
 UMBRAL_ENTIDAD = 3
 UMBRAL_RUBRO = 10
+UMBRAL_OBJETO_DEP = 5  # tipo × departamento: menos que esto no se indexa
 DIAS_VIGENTE = 45  # un "CONVOCADO" publicado hace más que esto ya no se ofrece como abierto
 MIN_PROPORCION = 0.5  # salvaguarda: no publicar si llega menos de la mitad
 PORTADA_ULTIMAS = 24
@@ -123,7 +124,11 @@ INFO = [
      "desc": "Qué significa cada etapa de un procedimiento de selección: convocatoria, registro de participantes, "
              "consultas y observaciones, integración de bases, ofertas, evaluación y buena pro."},
 ]
-GUIAS = [p for p in INFO if p["slug"].startswith(("como-", "etapas-"))]
+INFO.append({"slug": "glosario", "title": "Glosario de licitaciones: bases integradas, buena pro y más",
+             "h1": "Glosario de licitaciones del Estado", "indexable": True, "lastmod": "2026-10-30",
+             "desc": "Qué significan bases integradas, buena pro, consentimiento, desierto, postor, participante, "
+                     "RNP, SEACE y otros términos de las contrataciones públicas, en una línea cada uno."})
+GUIAS = [p for p in INFO if p["slug"].startswith(("como-", "etapas-", "glosario"))]
 ADSENSE = "ca-pub-6522291453297769"  # anuncios automáticos de AdSense (cuenta del dominio toca.pe)
 
 
@@ -368,6 +373,11 @@ class Sitio:
                             and p["items_txt"][0]["descripcion_txt"][:60] == p["descripcion_txt"][:60])
         p["adjudicaciones_txt"] = [{**x, "proveedor_txt": T.nombre_propio(x["proveedor"]),
                                     "monto_txt": soles(x.get("monto"))} for x in a.get("adjudicaciones") or []]
+        # Enlace directo a las bases (las integradas si ya existen): el SEACE las sirve sin cuenta.
+        docs = a.get("documentos") or []
+        bases = ([d for d in docs if "BASES INTEGRADAS" in (d.get("titulo") or "").upper()]
+                 or [d for d in docs if (d.get("titulo") or "").upper().startswith("BASES")])
+        p["bases"] = max(bases, key=lambda d: d.get("fecha") or "") if bases else None
         p["cerrado"] = False
 
         st = self.state["avisos"].get(a["ocid"])
@@ -576,6 +586,13 @@ def construir(sitio: Sitio, out: Path) -> None:
 
     repetidos = Counter(titulo_aviso(a) for a in sitio.vigentes)
     aun_repetidos = Counter(titulo_repetido(a, desempate(a)) for a in sitio.vigentes if repetidos[titulo_aviso(a)] > 1)
+    # Adjudicadas: título del proceso + "(adjudicada)"; si dos coinciden, con el número o la nomenclatura.
+    titulos_adj = {a["ocid"]: titulo_repetido(a, " (adjudicada)") for a in sitio.cerrados if a["adjudicaciones_txt"]}
+    for intento in (lambda a: f" (adjudicada, {desempate(a)[2:-1]})", lambda a: f" ({a['nomenclatura']})"):
+        cuenta = Counter(titulos_adj.values())
+        for a in sitio.cerrados:
+            if a["ocid"] in titulos_adj and cuenta[titulos_adj[a["ocid"]]] > 1:
+                titulos_adj[a["ocid"]] = titulo_repetido(a, intento(a))
     for a in sitio.vigentes + sitio.cerrados:
         idx_ent = sitio.entidad_indexable.get(a["entidad_slug"], False)
         migas = [("Inicio", "/"), (a["dep_txt"], f"/departamento/{a['dep_slug']}/")]
@@ -583,7 +600,12 @@ def construir(sitio: Sitio, out: Path) -> None:
             migas.append((a["entidad_txt"], f"/entidad/{a['entidad_slug']}/"))
         migas.append((a["nomenclatura"], None))
         h1 = f"Licitación de {a['corta']}"
-        if a["cerrado"]:
+        # Las cerradas con ganador se indexan: "quién ganó" es lo que se busca de ellas.
+        con_ganador = a["cerrado"] and bool(a["adjudicaciones_txt"])
+        if con_ganador:
+            # Se busca por el proceso ("licitación de … de la Municipalidad X"); el ganador va en la descripción.
+            titulo = titulos_adj[a["ocid"]]
+        elif a["cerrado"]:
             titulo = cortar(f"{a['nomenclatura']} – {a['entidad_txt']} ({(a['estado'] or 'cerrado').lower()})", 70)
         elif repetidos[titulo_aviso(a)] > 1:
             # Lo que la gente busca va primero; el número al final solo desempata.
@@ -592,12 +614,16 @@ def construir(sitio: Sitio, out: Path) -> None:
                 titulo = titulo_repetido(a, f" ({a['nomenclatura']})")
         else:
             titulo = elegir(titulo_aviso(a))
-        frases = [f"{a['tipo'] or 'Procedimiento'} {a['nomenclatura']} {de_articulo(a['entidad_txt'])} "
+        frases = [(f"Buena pro a {a['adjudicaciones_txt'][0]['proveedor_txt']}"
+                   + (f" por {a['adjudicaciones_txt'][0]['monto_txt']}." if a["adjudicaciones_txt"][0]["monto_txt"] else "."))
+                  if con_ganador else "",
+                  f"{a['tipo'] or 'Procedimiento'} {a['nomenclatura']} {de_articulo(a['entidad_txt'])} "
                   f"({a['dep_txt']}), publicado en el SEACE.",
-                  f"Monto: {a['monto_txt']}." if a["monto_txt"] else "",
+                  f"Monto: {a['monto_txt']}." if a["monto_txt"] and not con_ganador else "",
                   f"Consultas hasta el {fecha_corta(a['consultas_fin'])}." if a["dias"] is not None and a["dias"] >= 0 else "",
                   cortar(a["descripcion_txt"], 120)]
-        escribir(a["path"], "aviso.html", not a["cerrado"], a["lastmod"] if not a["cerrado"] else None,
+        escribir(a["path"], "aviso.html", not a["cerrado"] or con_ganador,
+                 a["lastmod"] if not a["cerrado"] or con_ganador else None,
                  titulo=titulo, h1=h1, descripcion=armar(frases), a=a, migas=migas,
                  misma_entidad=[x for x in sitio.por_entidad.get(a["entidad_slug"], []) if x["ocid"] != a["ocid"]][:5],
                  similares=sitio.similares(a),
@@ -607,6 +633,26 @@ def construir(sitio: Sitio, out: Path) -> None:
     for o in objetos:
         avisos = sitio.por_objeto.get(o["nombre"], [])
         r = sitio.resumen(avisos)
+        # Tipo × departamento (/objeto/obras/ancash/): "licitaciones de obras en Áncash"
+        o["por_dep"] = []
+        for d in departamentos:
+            sub = [a for a in avisos if a["dep_slug"] == d["slug"]]
+            if not sub:
+                continue
+            rs = sitio.resumen(sub)
+            path = f"{o['path']}{d['slug']}/"
+            o["por_dep"].append({"nombre": d["nombre"], "path": path, "n": len(sub)})
+            listado(path, sub, len(sub) >= UMBRAL_OBJETO_DEP,
+                    elegir(f"{o['titulo']} en {d['nombre']} {sitio.anio}: {plural(rs['n'], 'vigente', 'vigentes')}",
+                           f"{o['titulo']} en {d['nombre']} {sitio.anio}"),
+                    f"{o['titulo']} en {d['nombre']}",
+                    armar([f"{plural(rs['n'], 'convocatoria vigente', 'convocatorias vigentes')} de "
+                           f"{o['nombre'].lower()} de entidades de {d['nombre']} en el SEACE"
+                           + (f", por {rs['suma_txt']} publicados." if rs["suma_txt"] else "."),
+                           f"{plural(rs['semana'], 'cierra', 'cierran')} consultas esta semana." if rs["semana"] else "",
+                           f"Actualizado el {hoy_txt}."]),
+                    [("Inicio", "/"), (o["titulo"], o["path"]), (d["nombre"], None)],
+                    extra={"tipo": "departamento"})
         listado(o["path"], avisos, len(avisos) > 0,
                 elegir(f"{o['titulo']} del Estado {sitio.anio}: {plural(r['n'], 'vigente', 'vigentes')}",
                        f"{o['titulo']} del Estado {sitio.anio}"),
@@ -615,7 +661,22 @@ def construir(sitio: Sitio, out: Path) -> None:
                        + (f", por un total publicado de {r['suma_txt']}." if r["suma_txt"] else "."),
                        f"{plural(r['semana'], 'cierra', 'cierran')} consultas esta semana." if r["semana"] else "",
                        o["intro"], f"Actualizado el {hoy_txt}."]),
-                [("Inicio", "/"), ("Tipos", "/objeto/"), (o["titulo"], None)], intro=o["intro"], extra={"tipo": "objeto"})
+                [("Inicio", "/"), ("Tipos", "/objeto/"), (o["titulo"], None)], intro=o["intro"],
+                extra={"tipo": "objeto", "por_dep": [x for x in o["por_dep"] if x["n"] >= UMBRAL_OBJETO_DEP],
+                       "titulo_por_dep": f"{o['titulo']} por departamento"})
+
+    # Recién adjudicadas: quién ganó (dato que otros sitios cobran)
+    adjudicadas = sorted((a for a in sitio.cerrados if a["adjudicaciones_txt"]),
+                         key=lambda a: max(x.get("fecha") or "" for x in a["adjudicaciones_txt"]), reverse=True)
+    listado("/adjudicadas/", adjudicadas, True,
+            con_marca(f"Licitaciones adjudicadas {sitio.anio}: quién ganó la buena pro"),
+            "Licitaciones adjudicadas recientemente",
+            armar([f"{plural(len(adjudicadas), 'licitación adjudicada', 'licitaciones adjudicadas')} en los últimos "
+                   "dos meses, con el nombre del ganador, su RUC y el monto.", "Datos abiertos del OECE, gratis."]),
+            [("Inicio", "/"), ("Adjudicadas", None)],
+            intro="Procedimientos que ya tienen buena pro según los datos abiertos del OECE, del más reciente al "
+                  "más antiguo. Mira quién gana en tu rubro antes de preparar tu próxima oferta.",
+            extra={"tipo": "adjudicadas"})
 
     # Rubro
     for rb in rubros:

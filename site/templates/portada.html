@@ -20,6 +20,12 @@
 </section>
 
 <section class="bloque">
+  <h2>Quién ganó: licitaciones adjudicadas</h2>
+  <p class="bloque-nota">Ganador, RUC y monto de los procedimientos con buena pro de los últimos dos meses. Gratis y sin cuenta.</p>
+  <p class="mas"><a href="{{ url('/adjudicadas/') }}">Ver las licitaciones adjudicadas</a></p>
+</section>
+
+<section class="bloque">
   <h2>¿Primera vez vendiéndole al Estado?</h2>
   <ul class="deps">
     {% for g in guias %}<li><a href="{{ url('/' ~ g.slug ~ '/') }}">{{ g.h1 }}</a></li>{% endfor %}

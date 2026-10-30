@@ -98,7 +98,13 @@ def test_salvaguarda_no_publica_si_caen_los_datos(tmp_path):
 
 def test_construye_sitio_completo(tmp_path):
     data = tmp_path / "avisos.json"
-    data.write_text(json.dumps({"avisos": [normalizar(r) for r in CASOS.values()]}), encoding="utf-8")
+    avisos = [normalizar(r) for r in CASOS.values()]
+    # Una licitación ya adjudicada (el caso real 1261494 es contratación directa, que se excluye)
+    ganada = {**normalizar(CASOS["1261641"]), "ocid": "ocds-dgv273-seacev3-9999999", "id": "9999999",
+              "nomenclatura": "CP-ABR-99-2026-PRUEBA-1", "estado": "ADJUDICADO",
+              "adjudicaciones": [{"proveedor": "EMPRESA DE PRUEBA SAC", "ruc": "20123456789",
+                                  "monto": 50000.0, "fecha": "2026-10-28"}]}
+    data.write_text(json.dumps({"avisos": avisos + [ganada]}), encoding="utf-8")
     assert B.main(["--data", str(data), "--out", str(tmp_path / "public"), "--hoy", "2026-10-29"]) == 0
     pub = tmp_path / "public"
     assert (pub / "sitemap.xml").exists() and (pub / "robots.txt").exists()
@@ -107,5 +113,9 @@ def test_construye_sitio_completo(tmp_path):
     assert "contratacionesabiertas.oece.gob.pe/proceso/ocds-dgv273-seacev3-1261357" in html
     cerrado = next((pub / "licitacion").glob("*1259973/index.html")).read_text(encoding="utf-8")
     assert 'content="noindex' in cerrado and '"@type":"Demand"' not in cerrado
+    adjudicado = next((pub / "licitacion").glob("*9999999/index.html")).read_text(encoding="utf-8")
+    assert 'content="index' in adjudicado and "Empresa de Prueba" in adjudicado  # "quién ganó" se indexa
+    assert '"@type":"Demand"' not in adjudicado
+    assert (pub / "adjudicadas" / "index.html").exists() and (pub / "glosario" / "index.html").exists()
     for indice in ("departamento", "rubro", "entidad", "objeto", "monto"):  # las migas no llevan a un 404
         assert (pub / indice / "index.html").exists()

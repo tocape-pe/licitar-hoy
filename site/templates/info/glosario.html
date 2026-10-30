@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block contenido %}
+<article class="texto">
+<h1>{{ h1 }}</h1>
+<p>Los términos que vas a encontrar en las bases y en las fichas del SEACE, explicados en una línea. Para el proceso completo, mira <a href="{{ url('/etapas-de-una-licitacion/') }}">las etapas de una licitación</a>.</p>
+<dl class="glosario">
+  <dt id="absolucion">Absolución de consultas y observaciones</dt>
+  <dd>Documento (pliego) en el que la entidad responde lo que preguntaron u observaron los participantes. Sus respuestas pasan a las bases integradas.</dd>
+  <dt id="bases">Bases</dt>
+  <dd>Documento con las reglas del procedimiento: qué se contrata, requisitos, forma de presentar la oferta, evaluación y cronograma.</dd>
+  <dt id="bases-integradas">Bases integradas</dt>
+  <dd>Versión definitiva de las bases, que incorpora las respuestas a las consultas y observaciones. La oferta se prepara según esta versión.</dd>
+  <dt id="buena-pro">Buena pro</dt>
+  <dd>Decisión que declara al ganador del procedimiento. Se publica en el SEACE.</dd>
+  <dt id="consentimiento">Consentimiento de la buena pro</dt>
+  <dd>Momento en que la buena pro queda firme porque nadie la cuestionó dentro del plazo, o porque ya se resolvieron los cuestionamientos.</dd>
+  <dt id="consorcio">Consorcio</dt>
+  <dd>Unión de dos o más proveedores que presentan una oferta en conjunto para sumar experiencia o capacidad, sin crear una empresa nueva.</dd>
+  <dt id="consultas">Consultas y observaciones</dt>
+  <dd>Etapa en la que los participantes preguntan sobre las bases o piden corregir algo que limita la competencia. Su fecha límite es la que mostramos en cada aviso.</dd>
+  <dt id="convocatoria">Convocatoria</dt>
+  <dd>Publicación del procedimiento en el SEACE. Desde ese día corre el cronograma.</dd>
+  <dt id="cronograma">Cronograma</dt>
+  <dd>Lista de fechas de cada etapa del procedimiento. Está en las bases y en la ficha del SEACE, y puede cambiar con una prórroga o postergación.</dd>
+  <dt id="desierto">Desierto</dt>
+  <dd>Resultado cuando no hay ofertas válidas. La entidad puede convocar de nuevo el mismo procedimiento.</dd>
+  <dt id="especificaciones-tecnicas">Especificaciones técnicas</dt>
+  <dd>Descripción de los bienes que se compran: características, cantidades, plazo y lugar de entrega.</dd>
+  <dt id="garantia">Garantía</dt>
+  <dd>Respaldo financiero que puede pedirse al ganador, por ejemplo de fiel cumplimiento del contrato. Las bases dicen cuáles se exigen y en qué forma.</dd>
+  <dt id="nomenclatura">Nomenclatura</dt>
+  <dd>Código del procedimiento, como LP-SM-4-2026-MPI-1: tipo, número, año, siglas de la entidad y número de convocatoria.</dd>
+  <dt id="ocds">OCDS</dt>
+  <dd>Estándar internacional de datos abiertos de contrataciones (Open Contracting Data Standard). El OECE publica así los procedimientos del SEACE, y de ahí salen los datos de {{ marca }}.</dd>
+  <dt id="oece">OECE</dt>
+  <dd>Organismo Especializado para las Contrataciones Públicas Eficientes, que reemplazó al OSCE. Administra el SEACE y el RNP.</dd>
+  <dt id="participante">Participante</dt>
+  <dd>Proveedor que se registró en un procedimiento. Solo los participantes pueden presentar ofertas.</dd>
+  <dt id="postor">Postor</dt>
+  <dd>Participante que presentó una oferta.</dd>
+  <dt id="rnp">RNP</dt>
+  <dd>Registro Nacional de Proveedores. Hay que estar inscrito para participar y contratar con el Estado. Mira <a href="{{ url('/como-inscribirse-en-el-rnp/') }}">cómo inscribirse</a>.</dd>
+  <dt id="seace">SEACE</dt>
+  <dd>Sistema Electrónico de Contrataciones del Estado: donde se publican los procedimientos y donde los proveedores se registran y presentan sus ofertas.</dd>
+  <dt id="subasta-inversa">Subasta inversa electrónica</dt>
+  <dd>Procedimiento para bienes y servicios comunes en el que gana el menor precio; los postores bajan su oferta en línea.</dd>
+  <dt id="terminos-de-referencia">Términos de referencia</dt>
+  <dd>Descripción de los servicios o consultorías que se contratan: actividades, perfil del personal, plazos y entregables.</dd>
+</dl>
+<p class="nota">Glosario informativo revisado el {{ fecha_larga(revisado) }}. Las definiciones legales están en la Ley N.° 32069 y su reglamento.</p>
+</article>
+{% endblock %}

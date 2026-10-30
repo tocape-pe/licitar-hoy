@@ -4,10 +4,11 @@
 <header class="l-cab">
   <h1>{{ h1 }}{% if pagina > 1 %} <span class="l-pag">(página {{ pagina }})</span>{% endif %}</h1>
   {% if pagina == 1 %}
-  <p class="l-resumen">{{ plural(resumen.n, 'licitación vigente', 'licitaciones vigentes') }}{% if resumen.semana %} · <strong>{{ plural(resumen.semana, 'cierra', 'cierran') }} consultas esta semana</strong>{% endif %}{% if resumen.suma_txt %} · {{ resumen.suma_txt }} en montos publicados{% endif %}</p>
+  {% if extra.tipo == 'adjudicadas' %}<p class="l-resumen">{{ plural(resumen.n, 'licitación adjudicada', 'licitaciones adjudicadas') }} en los últimos dos meses</p>{% else %}
+  <p class="l-resumen">{{ plural(resumen.n, 'licitación vigente', 'licitaciones vigentes') }}{% if resumen.semana %} · <strong>{{ plural(resumen.semana, 'cierra', 'cierran') }} consultas esta semana</strong>{% endif %}{% if resumen.suma_txt %} · {{ resumen.suma_txt }} en montos publicados{% endif %}</p>{% endif %}
   {% if intro %}<p class="l-intro">{{ intro }}</p>{% endif %}
   {% endif %}
-  <p class="l-act">Actualizado el {{ actualizado_txt }}. Ordenadas por fecha límite de consultas.</p>
+  <p class="l-act">Actualizado el {{ actualizado_txt }}. {{ 'Ordenadas por fecha de buena pro, de la más reciente.' if extra.tipo == 'adjudicadas' else 'Ordenadas por fecha límite de consultas.' }}</p>
 </header>
 {% if avisos %}
 <div class="rejilla">
@@ -25,7 +26,15 @@
   {% endfor %}
 </nav>
 {% endif %}
-{% if pagina == 1 and resumen.top and extra.tipo != 'entidad' %}
+{% if pagina == 1 and extra.por_dep %}
+<section class="bloque">
+  <h2>{{ extra.titulo_por_dep }}</h2>
+  <ul class="deps">
+    {% for d in extra.por_dep %}<li><a href="{{ url(d.path) }}">{{ d.nombre }} <span>{{ miles(d.n) }}</span></a></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% if pagina == 1 and resumen.top and extra.tipo not in ('entidad', 'adjudicadas') %}
 <section class="bloque">
   <h2>Entidades con más licitaciones aquí</h2>
   <ul class="entidades">

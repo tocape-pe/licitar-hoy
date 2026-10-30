@@ -7,8 +7,9 @@
     <span class="t-tipo">{{ a.objeto or 'Contratación' }} · {{ a.tipo }}</span>
     {% if mostrar_lugar %}<span class="t-lugar">{{ a.dep_txt }}</span>{% endif %}
   </p>
+  {% if a.cerrado and a.adjudicaciones_txt %}<p class="t-ganador">Buena pro: <strong>{{ a.adjudicaciones_txt[0].proveedor_txt }}</strong>{% if a.adjudicaciones_txt[0].monto_txt %} · {{ a.adjudicaciones_txt[0].monto_txt }}{% endif %}</p>{% endif %}
   <p class="t-plazo">
-    {% if a.consultas_txt %}<time class="t-cierre{{ ' urgente' if a.urgente }}" datetime="{{ a.consultas_fin[:10] }}">{{ a.consultas_txt }}</time>{% endif %}
+    {% if a.consultas_txt and not a.cerrado %}<time class="t-cierre{{ ' urgente' if a.urgente }}" datetime="{{ a.consultas_fin[:10] }}">{{ a.consultas_txt }}</time>{% endif %}
     {% if a.segunda %}<span class="t-chip">{{ a.convocatoria_n }}.ª convocatoria</span>{% endif %}
   </p>
   <span class="t-ver" aria-hidden="true">{{ a.nomenclatura }}</span>
