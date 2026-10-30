@@ -1,12 +1,15 @@
 name: Actualizar licitaciones y publicar
 
 on:
-  schedule:
-    # El OECE publica su lote diario hacia las 10:30 de Lima (UTC-5). 11:30 lo
-    # recoge; 19:00 reintenta por si el lote llegó tarde.
-    - cron: "30 16 * * *"
-    - cron: "0 0 * * *"
+  # Sin horario: la API del OECE responde 403 a las IP de GitHub Actions. La
+  # descarga la hace la PC (herramientas/actualizar_desde_pc.py, 11:30 y 19:00),
+  # que sube avisos.json a la rama "data" y lanza esto con solo_publicar=true.
   workflow_dispatch:
+    inputs:
+      solo_publicar:
+        description: "No descargar: publicar con los datos de la rama data"
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths: ["scraper/**", "site/**", ".github/workflows/actualizar.yml"]
@@ -55,7 +58,9 @@ jobs:
       - name: Descargar licitaciones del OECE
         # Un push que solo cambia la web no vuelve a descargar: reutiliza los datos.
         run: |
-          if [ "${{ github.event_name }}" = "push" ] && [ "$(cat previous.json)" != "{}" ] \
+          if [ "${{ inputs.solo_publicar }}" = "true" ] && [ "$(cat previous.json)" != "{}" ]; then
+            cp previous.json out/avisos.json
+          elif [ "${{ github.event_name }}" = "push" ] && [ "$(cat previous.json)" != "{}" ] \
              && ! git diff --name-only HEAD~1 HEAD | grep -q '^scraper/'; then
             cp previous.json out/avisos.json
           else
