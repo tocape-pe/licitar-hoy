@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "_tarjeta.html" import tarjeta %}
+{% block contenido %}
+<section class="heroe">
+  <h1>{{ h1 }}</h1>
+  <p class="heroe-sub">Hoy hay <strong>{{ miles(total_vigentes) }} licitaciones vigentes</strong> en el Perú; <strong>{{ miles(n_semana) }}</strong> cierran consultas en los próximos 7 días.</p>
+  <ul class="atajos">
+    {% for o in objetos %}{% if o.n %}<li><a href="{{ url(o.path) }}">{{ o.nombre }} <span>{{ miles(o.n) }}</span></a></li>{% endif %}{% endfor %}
+  </ul>
+  <p class="heroe-texto">Licitaciones, concursos y subastas de municipalidades, gobiernos regionales, hospitales y ministerios, tomadas de los datos abiertos del OECE y actualizadas cada día. Cada una enlaza a su ficha oficial. Para participar necesitas estar inscrito en el RNP y registrarte en el SEACE dentro del plazo.</p>
+</section>
+
+<section class="bloque">
+  <h2>Cierran consultas esta semana</h2>
+  <p class="bloque-nota">La primera fecha límite de cada procedimiento. Después vienen la integración de bases y la presentación de ofertas: esas fechas están en el cronograma de la ficha oficial.</p>
+  <div class="rejilla">
+    {% for a in semana %}{{ tarjeta(a) }}{% endfor %}
+  </div>
+  {% if n_semana > semana|length %}<p class="mas"><a href="{{ url('/esta-semana/') }}">Ver las {{ miles(n_semana) }} que cierran esta semana</a></p>{% endif %}
+</section>
+
+<section class="bloque">
+  <h2>Por rubro</h2>
+  <ul class="deps">
+    {% for r in rubros %}<li><a href="{{ url(r.path) }}">{{ r.nombre }} <span>{{ miles(r.n) }}</span></a></li>{% endfor %}
+  </ul>
+</section>
+
+<section class="bloque">
+  <h2>Por departamento</h2>
+  <ul class="deps">
+    {% for d in departamentos %}<li><a href="{{ url(d.path) }}">{{ d.nombre }} <span>{{ miles(d.n) }}</span></a></li>{% endfor %}
+  </ul>
+</section>
+
+<section class="bloque">
+  <h2>Por monto publicado</h2>
+  <ul class="deps">
+    {% for r in rangos %}<li><a href="{{ url(r.path) }}">{{ r.nombre }} <span>{{ miles(r.n) }}</span></a></li>{% endfor %}
+  </ul>
+  <p class="bloque-nota">Muchas licitaciones de bienes y servicios no publican su monto en los datos abiertos; esas no aparecen aquí.</p>
+</section>
+{% endblock %}

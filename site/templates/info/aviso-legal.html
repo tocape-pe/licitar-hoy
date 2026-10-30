@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="texto">
+<h1>{{ h1 }}</h1>
+<p>Los datos de las licitaciones provienen del <a href="{{ fuente_url }}" rel="noopener">{{ fuente }}</a> y se reutilizan bajo la licencia <a href="{{ licencia_url }}" rel="noopener license">Creative Commons Atribución 4.0</a>. {{ marca }} los ordena, cambia el formato de los textos (mayúsculas, tildes) y calcula agrupaciones (rubro, rango de monto, días que faltan); no modifica montos, fechas ni descripciones.</p>
+<p>{{ marca }} no es el OECE, el SEACE ni la entidad convocante, y no tiene relación con ellos. No cobra, no intermedia en las contrataciones y no garantiza resultados. La información oficial y vinculante es la de la ficha del procedimiento y sus bases: verifícala siempre antes de participar.</p>
+<h2>Correcciones</h2>
+<p>Si ves un dato que no coincide con la ficha oficial, escríbenos desde la <a href="https://toca.pe/#contacto">página de contacto</a> o con el enlace "Avísanos" de cada licitación.</p>
+</div>
+{% endblock %}

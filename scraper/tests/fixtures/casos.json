@@ -1,0 +1,1415 @@
+[
+ {
+  "ocid": "ocds-dgv273-seacev3-1261920",
+  "id": "ocds-dgv273-seacev3-1261920-2026-10-29T10:24:52.613935-05:00",
+  "date": "2026-10-29T10:24:52.613922-05:00",
+  "publishedDate": "2026-10-29T10:24:52.613940-05:00",
+  "tag": [
+   "planning",
+   "tender"
+  ],
+  "initiationType": "tender",
+  "buyer": {
+   "id": "PE-CONSUCODE-10015",
+   "name": "PROGRAMA SUBSECTORIAL DE IRRIGACIONES - PSI"
+  },
+  "planning": {
+   "budget": {
+    "description": "Fondos Públicos"
+   }
+  },
+  "tender": {
+   "id": "1261920",
+   "title": "DIRECTA-DIRECTA-62-2026-MIDAGRI-PSI-1",
+   "description": "SERVICIO DE ¿LIMPIEZA Y DESCOLMATACIÓN DE 09 ACTIVIDADES ASOCIADAS AL FENOMENO DEL NIÑO 2026-2027, EN LOS SECTORES PUENTE LURIN - MALECÓN LAS PALMAS, PUENTE LURIN - MALECÓN LOS HUERTO, SANTO DOMINGO DE CHAGÑA, PUENTE LURÍN - MALECÓN LOS OLIVARES, PTAR SEDAPAL - SANTA ROSA, PACAYAL, CERRO LEON, UNTO",
+   "procuringEntity": {
+    "id": "PE-CONSUCODE-10015",
+    "name": "PROGRAMA SUBSECTORIAL DE IRRIGACIONES - PSI"
+   },
+   "datePublished": "2026-10-28T19:59:00-05:00",
+   "procurementMethod": "direct",
+   "procurementMethodDetails": "Contratación Directa",
+   "mainProcurementCategory": "services",
+   "additionalProcurementCategories": [
+    "services"
+   ],
+   "value": {
+    "amount": 0.0,
+    "currency": "PEN",
+    "currencyName": "Soles",
+    "amount_PEN": 0.0
+   },
+   "tenderers": [
+    {
+     "id": "PE-RUC-20602258395",
+     "name": "INVERSIONES SARA-ROSALES SOCIEDAD ANONIMA CERRADA - INVERSIONES SARA-ROSALES S.A.C."
+    }
+   ],
+   "numberOfTenderers": 1,
+   "items": [
+    {
+     "id": "21403330",
+     "position": "1",
+     "description": "SERVICIO DE ¿LIMPIEZA Y DESCOLMATACIÓN DE 09 ACTIVIDADES ASOCIADAS AL FENOMENO DEL NIÑO 2026-2027, EN LOS SECTORES PUENTE LURIN - MALECÓN LAS PALMAS, PUENTE LURIN - MALECÓN LOS HUERTO, SANTO DOMINGO DE CHAGÑA, PUENTE LURÍN - MALECÓN LOS OLIVARES, PTA",
+     "statusDetails": "CONVOCADO",
+     "status": "active",
+     "quantity": 9.0,
+     "totalValue": {
+      "amount": 0.0,
+      "currency": "PEN",
+      "currencyName": "Soles"
+     },
+     "unit": {
+      "id": "40",
+      "name": "Unidad",
+      "scheme": "PE-SEACE3-UnidadMedida"
+     }
+    }
+   ],
+   "documents": [
+    {
+     "id": "24831474986146329",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=62b981cd-2763-484e-85f6-1133d7133242",
+     "datePublished": "2026-10-28T19:59:00-05:00",
+     "format": "pdf",
+     "documentType": "biddingDocuments",
+     "title": "Bases Administrativas",
+     "language": "es"
+    }
+   ],
+   "hasTenderInformationProtectedByLaw": false
+  },
+  "parties": [
+   {
+    "id": "PE-CONSUCODE-10015",
+    "name": "PROGRAMA SUBSECTORIAL DE IRRIGACIONES - PSI",
+    "identifier": {
+     "id": "10015",
+     "scheme": "PE-CONSUCODE",
+     "legalName": "PROGRAMA SUBSECTORIAL DE IRRIGACIONES - PSI"
+    },
+    "additionalIdentifiers": [
+     {
+      "id": "20414868216",
+      "scheme": "PE-RUC",
+      "legalName": "PROGRAMA SUBSECTORIAL DE IRRIGACIONES - PSI"
+     }
+    ],
+    "address": {
+     "streetAddress": "AV. REPÚBLICA DE CHILE NRO 485",
+     "locality": "JESUS MARIA",
+     "region": "LIMA",
+     "department": "LIMA",
+     "countryName": "PERU"
+    },
+    "contactPoint": {
+     "telephone": "4244488 - 142",
+     "url": "https://WWW.GOB.PE/PSI"
+    },
+    "roles": [
+     "buyer",
+     "procuringEntity"
+    ]
+   },
+   {
+    "id": "PE-RUC-20602258395",
+    "name": "INVERSIONES SARA-ROSALES SOCIEDAD ANONIMA CERRADA - INVERSIONES SARA-ROSALES S.A.C.",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "20602258395",
+     "legalName": "INVERSIONES SARA-ROSALES SOCIEDAD ANONIMA CERRADA - INVERSIONES SARA-ROSALES S.A.C."
+    },
+    "address": {
+     "countryName": "PERU"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   }
+  ],
+  "sources": [
+   {
+    "id": "seace_v3",
+    "name": "Sistema Electrónico de Contrataciones del Estado - Versión 3",
+    "url": "https://prodapp2.seace.gob.pe/seacebus-uiwd-pub/buscadorPublico/buscadorPublico.xhtml"
+   }
+  ],
+  "dataSegmentation": {
+   "id": "2026-10",
+   "criteria": [
+    "añoPublicacionProceso",
+    "mesPublicacionProceso"
+   ]
+  }
+ },
+ {
+  "ocid": "ocds-dgv273-seacev3-1261641",
+  "id": "ocds-dgv273-seacev3-1261641-2026-10-29T10:24:52.429261-05:00",
+  "date": "2026-10-29T10:24:52.429248-05:00",
+  "publishedDate": "2026-10-29T10:24:52.429265-05:00",
+  "tag": [
+   "planning",
+   "tender"
+  ],
+  "initiationType": "tender",
+  "buyer": {
+   "id": "PE-CONSUCODE-2384",
+   "name": "SERVICIO DE AGUA POTABLE Y ALCANTARILLADO DE AREQUIPA"
+  },
+  "planning": {
+   "budget": {
+    "description": "Fondos Públicos"
+   }
+  },
+  "tender": {
+   "id": "1261641",
+   "title": "CP-ABR-38-2026-SEDAPAR-2",
+   "description": "CONTRATACIÓN DE SERVICIOS ¿SERVICIO DE SUSCRIPCIÓN DE LICENCIAS DE SOFTWARE PARA HERRAMIENTA DE ADMINISTRACIÓN DE SERVICIOS\" SEGUNDA CONVOCATORIA",
+   "procuringEntity": {
+    "id": "PE-CONSUCODE-2384",
+    "name": "SERVICIO DE AGUA POTABLE Y ALCANTARILLADO DE AREQUIPA"
+   },
+   "datePublished": "2026-10-28T10:50:00-05:00",
+   "procurementMethodDetails": "Concurso Público Abreviado",
+   "mainProcurementCategory": "services",
+   "additionalProcurementCategories": [
+    "services"
+   ],
+   "value": {
+    "amount": 0.0,
+    "currency": "PEN",
+    "currencyName": "Soles",
+    "amount_PEN": 0.0
+   },
+   "tenderPeriod": {
+    "startDate": "2026-10-28T00:00:00-05:00",
+    "endDate": "2026-10-28T00:00:00-05:00"
+   },
+   "enquiryPeriod": {
+    "startDate": "2026-10-29T00:01:00-05:00",
+    "endDate": "2026-11-02T23:59:00-05:00",
+    "durationInDays": 4
+   },
+   "items": [
+    {
+     "id": "21402999",
+     "position": "1",
+     "description": "SERVICIO DE RENOVACION DE LICENCIA DE SOFTWARE DE COLABORACION PARA CLIENTE(USUARIO)",
+     "statusDetails": "CONVOCADO",
+     "status": "active",
+     "classification": {
+      "id": "8111220200394604",
+      "description": "SERVICIO DE ACTUALIZACION DE LICENCIA PARA SOFTWARE DE ALTA FRECUENCIA",
+      "scheme": "CUBSO"
+     },
+     "additionalClassifications": [
+      {
+       "id": "81112202",
+       "description": "Parches o actualizaciones de software",
+       "scheme": "UNSPSC"
+      }
+     ],
+     "quantity": 1.0,
+     "totalValue": {
+      "amount": 0.0,
+      "currency": "PEN",
+      "currencyName": "Soles"
+     },
+     "unit": {
+      "id": "40",
+      "name": "Unidad",
+      "scheme": "PE-SEACE3-UnidadMedida"
+     }
+    }
+   ],
+   "documents": [
+    {
+     "id": "24831474986145154",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=7846cca4-be8a-4136-9ebf-bb2f8729673d",
+     "datePublished": "2026-10-28T10:50:00-05:00",
+     "format": "rar",
+     "documentType": "biddingDocuments",
+     "title": "Bases Administrativas",
+     "language": "es"
+    },
+    {
+     "id": "24831474986145155",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=ad59ab86-30d9-4a94-9c8c-605d1cf70860",
+     "datePublished": "2026-10-28T10:50:00-05:00",
+     "format": "pdf",
+     "documentType": "evaluationReports",
+     "title": "Informe que sustenta la declaratoria de Desierto",
+     "language": "es"
+    }
+   ],
+   "hasTenderInformationProtectedByLaw": false
+  },
+  "parties": [
+   {
+    "id": "PE-CONSUCODE-2384",
+    "name": "SERVICIO DE AGUA POTABLE Y ALCANTARILLADO DE AREQUIPA",
+    "identifier": {
+     "id": "2384",
+     "scheme": "PE-CONSUCODE",
+     "legalName": "SERVICIO DE AGUA POTABLE Y ALCANTARILLADO DE AREQUIPA"
+    },
+    "additionalIdentifiers": [
+     {
+      "id": "20100211034",
+      "scheme": "PE-RUC",
+      "legalName": "SERVICIO DE AGUA POTABLE Y ALCANTARILLADO DE AREQUIPA"
+     }
+    ],
+    "address": {
+     "streetAddress": "VIRGEN DEL PILAR N° 1701",
+     "locality": "AREQUIPA",
+     "region": "AREQUIPA",
+     "department": "AREQUIPA",
+     "countryName": "PERU"
+    },
+    "contactPoint": {
+     "telephone": "054606262"
+    },
+    "roles": [
+     "buyer",
+     "procuringEntity"
+    ]
+   }
+  ],
+  "sources": [
+   {
+    "id": "seace_v3",
+    "name": "Sistema Electrónico de Contrataciones del Estado - Versión 3",
+    "url": "https://prodapp2.seace.gob.pe/seacebus-uiwd-pub/buscadorPublico/buscadorPublico.xhtml"
+   }
+  ],
+  "dataSegmentation": {
+   "id": "2026-10",
+   "criteria": [
+    "añoInicioConvocatoria",
+    "mesInicioConvocatoria"
+   ]
+  }
+ },
+ {
+  "ocid": "ocds-dgv273-seacev3-1261562",
+  "id": "ocds-dgv273-seacev3-1261562-2026-10-29T10:24:52.396428-05:00",
+  "date": "2026-10-29T10:24:52.396416-05:00",
+  "publishedDate": "2026-10-29T10:24:52.396433-05:00",
+  "tag": [
+   "planning",
+   "tender"
+  ],
+  "initiationType": "tender",
+  "buyer": {
+   "id": "PE-CONSUCODE-656",
+   "name": "MUNICIPALIDAD DISTRITAL DE PIMPINGOS"
+  },
+  "planning": {
+   "budget": {
+    "description": "Fondos Públicos"
+   }
+  },
+  "tender": {
+   "id": "1261562",
+   "title": "LP-ABR-3-2026-MDP/CS-1",
+   "description": "ADQUISICIÓN DE ¿LECHE EVAPORADA ENTERA DE 410 GR¿ y ¿HOJUELAS PRECOCIDAS DE AVENA QUINUA CON HARINA DE SOYA Y HARINA DE MACA FORTIFICADAS CON VITAMINAS Y MINERALES BOLSA DE 0.975 GR¿ PARA ATENDER A LOS BENEFICIARIOS DEL PROGRAMA VASO DE LECHE, PERIODO ENERO -DICIEMBRE 2027",
+   "procuringEntity": {
+    "id": "PE-CONSUCODE-656",
+    "name": "MUNICIPALIDAD DISTRITAL DE PIMPINGOS"
+   },
+   "datePublished": "2026-10-28T16:50:00-05:00",
+   "procurementMethodDetails": "Licitación Pública Abreviada",
+   "mainProcurementCategory": "goods",
+   "additionalProcurementCategories": [
+    "goods"
+   ],
+   "value": {
+    "amount": 0.0,
+    "currency": "PEN",
+    "currencyName": "Soles",
+    "amount_PEN": 0.0
+   },
+   "tenderPeriod": {
+    "startDate": "2026-10-28T00:00:00-05:00",
+    "endDate": "2026-10-28T00:00:00-05:00"
+   },
+   "enquiryPeriod": {
+    "startDate": "2026-10-29T00:01:00-05:00",
+    "endDate": "2026-11-02T23:59:00-05:00",
+    "durationInDays": 4
+   },
+   "items": [
+    {
+     "id": "21400928",
+     "position": "1",
+     "description": "ADQUISICIÓN DE LECHE EVAPORADA ENTERA DE 410 GR y HOJUELAS PRECOCIDAS DE AVENA QUINUA CON HARINA DE SOYA Y HARINA DE MACA FORTIFICADAS CON VITAMINAS Y MINERALES BOLSA DE 0.975 GR PARA ATENDER A LOS BENEFICIARIOS DEL PROGRAMA VASO DE LECHE, ENERO - DI",
+     "statusDetails": "CONVOCADO",
+     "status": "active",
+     "quantity": 2.0,
+     "totalValue": {
+      "amount": 0.0,
+      "currency": "PEN",
+      "currencyName": "Soles"
+     },
+     "unit": {
+      "id": "40",
+      "name": "Unidad",
+      "scheme": "PE-SEACE3-UnidadMedida"
+     }
+    }
+   ],
+   "documents": [
+    {
+     "id": "24831474986145692",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=dc1b803b-4860-48fb-9e47-79455286338f",
+     "datePublished": "2026-10-28T16:50:00-05:00",
+     "format": "pdf",
+     "documentType": "biddingDocuments",
+     "title": "Bases Administrativas",
+     "language": "es"
+    }
+   ],
+   "hasTenderInformationProtectedByLaw": false
+  },
+  "parties": [
+   {
+    "id": "PE-CONSUCODE-656",
+    "name": "MUNICIPALIDAD DISTRITAL DE PIMPINGOS",
+    "identifier": {
+     "id": "656",
+     "scheme": "PE-CONSUCODE",
+     "legalName": "MUNICIPALIDAD DISTRITAL DE PIMPINGOS"
+    },
+    "additionalIdentifiers": [
+     {
+      "id": "20232258242",
+      "scheme": "PE-RUC",
+      "legalName": "MUNICIPALIDAD DISTRITAL DE PIMPINGOS"
+     }
+    ],
+    "address": {
+     "streetAddress": "UNION Nº 145 INT. 1",
+     "locality": "PIMPINGOS",
+     "region": "CUTERVO",
+     "department": "CAJAMARCA",
+     "countryName": "PERU"
+    },
+    "roles": [
+     "buyer",
+     "procuringEntity"
+    ]
+   }
+  ],
+  "sources": [
+   {
+    "id": "seace_v3",
+    "name": "Sistema Electrónico de Contrataciones del Estado - Versión 3",
+    "url": "https://prodapp2.seace.gob.pe/seacebus-uiwd-pub/buscadorPublico/buscadorPublico.xhtml"
+   }
+  ],
+  "dataSegmentation": {
+   "id": "2026-10",
+   "criteria": [
+    "añoInicioConvocatoria",
+    "mesInicioConvocatoria"
+   ]
+  }
+ },
+ {
+  "ocid": "ocds-dgv273-seacev3-1261494",
+  "id": "ocds-dgv273-seacev3-1261494-2026-10-29T10:24:52.337111-05:00",
+  "date": "2026-10-29T10:24:52.337099-05:00",
+  "publishedDate": "2026-10-29T10:24:52.337117-05:00",
+  "tag": [
+   "planning",
+   "tender",
+   "award"
+  ],
+  "initiationType": "tender",
+  "buyer": {
+   "id": "PE-CONSUCODE-10352",
+   "name": "GOBIERNO REGIONAL DE PIURA - PROYECTO ESPECIAL CHIRA PIURA"
+  },
+  "planning": {
+   "budget": {
+    "description": "Fondos Públicos"
+   }
+  },
+  "tender": {
+   "id": "1261494",
+   "title": "DIRECTA-DIRECTA-3-2026-GRP-PECHP-40600-1",
+   "description": "ADQUISICIÓN DE COMBUSTIBLE DIESEL B5 S-50 UV PARA EL ABASTECIMIENTO DE MAQUINARIA PESADA EN EL PLAN DE ACTIVIDADES : LIMPIEZA, DESBROCE , DECOLMATACION Y ELIMINACION DE MATERIAL DEL DREN 13.08 DESDE EL KM.27+100 HASTA EL 57+000, PROVINCIA DE PIURA DISTRITO DE CURAMORI, CATACAOS",
+   "procuringEntity": {
+    "id": "PE-CONSUCODE-10352",
+    "name": "GOBIERNO REGIONAL DE PIURA - PROYECTO ESPECIAL CHIRA PIURA"
+   },
+   "datePublished": "2026-10-28T10:29:00-05:00",
+   "procurementMethod": "direct",
+   "procurementMethodDetails": "Contratación Directa",
+   "mainProcurementCategory": "goods",
+   "additionalProcurementCategories": [
+    "goods"
+   ],
+   "value": {
+    "amount": 626184.0,
+    "currency": "PEN",
+    "currencyName": "Soles",
+    "amount_PEN": 626184.0
+   },
+   "tenderers": [
+    {
+     "id": "PE-RUC-20605141723",
+     "name": "E.E.S.S. ONERGY SOCIEDAD ANONIMA CERRADA"
+    }
+   ],
+   "numberOfTenderers": 1,
+   "items": [
+    {
+     "id": "21402880",
+     "position": "1",
+     "description": "ADQUISICIÓN DE COMBUSTIBLE DIESEL B5 S-50 UV PARA EL ABASTECIMIENTO DE MAQUINARIA PESADA EN EL PLAN DE ACTIVIDADES : LIMPIEZA, DESBROCE , DECOLMATACION Y ELIMINACION DE MATERIAL DEL DREN 13.08 DESDE EL KM.27+100 HASTA EL 57+000, PROVINCIA DE PIURA DI",
+     "statusDetails": "ADJUDICADO",
+     "status": "complete",
+     "classification": {
+      "id": "1510150500233280",
+      "description": "DIESEL B5 S-50",
+      "scheme": "CUBSO"
+     },
+     "additionalClassifications": [
+      {
+       "id": "15101505",
+       "description": "Diesel",
+       "scheme": "UNSPSC"
+      }
+     ],
+     "quantity": 21600.0,
+     "totalValue": {
+      "amount": 626184.0,
+      "currency": "PEN",
+      "currencyName": "Soles"
+     },
+     "unit": {
+      "id": "13",
+      "name": "Galon",
+      "scheme": "PE-SEACE3-UnidadMedida"
+     }
+    }
+   ],
+   "documents": [
+    {
+     "id": "24831474986145116",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=856c7085-d545-4795-bc93-b5c4d69ddf88",
+     "datePublished": "2026-10-28T10:29:00-05:00",
+     "format": "pdf",
+     "documentType": "biddingDocuments",
+     "title": "Bases Administrativas",
+     "language": "es"
+    },
+    {
+     "id": "24831474986145375",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=c5a8e8df-643c-4cca-b681-fc4995526519",
+     "datePublished": "2026-10-28T14:16:18-05:00",
+     "format": "zip",
+     "documentType": "biddingDocuments",
+     "title": "Documentos de Presentación de Propuestas",
+     "language": "es"
+    },
+    {
+     "id": "24831474986145376",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=4193d924-fe55-4f83-aa1b-878255a3df2a",
+     "datePublished": "2026-10-28T14:16:19-05:00",
+     "format": "zip",
+     "documentType": "awardNotice",
+     "title": "Documentos de Otorgamiento de Buena Pro",
+     "language": "es"
+    }
+   ],
+   "hasTenderInformationProtectedByLaw": false
+  },
+  "awards": [
+   {
+    "id": "1261494-20605141723",
+    "value": {
+     "amount": 626184.0,
+     "currency": "PEN",
+     "currencyName": "Soles"
+    },
+    "items": [
+     {
+      "id": "21402880",
+      "position": "1",
+      "description": "ADQUISICIÓN DE COMBUSTIBLE DIESEL B5 S-50 UV PARA EL ABASTECIMIENTO DE MAQUINARIA PESADA EN EL PLAN DE ACTIVIDADES : LIMPIEZA, DESBROCE , DECOLMATACION Y ELIMINACION DE MATERIAL DEL DREN 13.08 DESDE EL KM.27+100 HASTA EL 57+000, PROVINCIA DE PIURA DI",
+      "statusDetails": "ADJUDICADO",
+      "status": "pending",
+      "classification": {
+       "id": "1510150500233280",
+       "description": "DIESEL B5 S-50",
+       "scheme": "CUBSO"
+      },
+      "additionalClassifications": [
+       {
+        "id": "15101505",
+        "description": "Diesel",
+        "scheme": "UNSPSC"
+       }
+      ],
+      "quantity": 21600.0,
+      "totalValue": {
+       "amount": 626184.0,
+       "currency": "PEN",
+       "currencyName": "Soles"
+      },
+      "unit": {
+       "id": "13",
+       "name": "Galon",
+       "scheme": "PE-SEACE3-UnidadMedida"
+      }
+     }
+    ],
+    "date": "2026-10-28T00:00:00-05:00",
+    "suppliers": [
+     {
+      "id": "PE-RUC-20605141723",
+      "name": "E.E.S.S. ONERGY SOCIEDAD ANONIMA CERRADA"
+     }
+    ]
+   }
+  ],
+  "parties": [
+   {
+    "id": "PE-CONSUCODE-10352",
+    "name": "GOBIERNO REGIONAL DE PIURA - PROYECTO ESPECIAL CHIRA PIURA",
+    "identifier": {
+     "id": "10352",
+     "scheme": "PE-CONSUCODE",
+     "legalName": "GOBIERNO REGIONAL DE PIURA - PROYECTO ESPECIAL CHIRA PIURA"
+    },
+    "additionalIdentifiers": [
+     {
+      "id": "20154477536",
+      "scheme": "PE-RUC",
+      "legalName": "GOBIERNO REGIONAL DE PIURA - PROYECTO ESPECIAL CHIRA PIURA"
+     }
+    ],
+    "address": {
+     "streetAddress": "KM. 3.5 CARRETERA PANAMERICANA PIURA-SULLANA",
+     "locality": "PIURA",
+     "region": "PIURA",
+     "department": "PIURA",
+     "countryName": "PERU"
+    },
+    "contactPoint": {
+     "telephone": "07332130"
+    },
+    "roles": [
+     "buyer",
+     "procuringEntity"
+    ]
+   },
+   {
+    "id": "PE-RUC-20605141723",
+    "name": "E.E.S.S. ONERGY SOCIEDAD ANONIMA CERRADA",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "20605141723",
+     "legalName": "E.E.S.S. ONERGY SOCIEDAD ANONIMA CERRADA"
+    },
+    "address": {
+     "countryName": "PERU"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer",
+     "supplier"
+    ]
+   }
+  ],
+  "sources": [
+   {
+    "id": "seace_v3",
+    "name": "Sistema Electrónico de Contrataciones del Estado - Versión 3",
+    "url": "https://prodapp2.seace.gob.pe/seacebus-uiwd-pub/buscadorPublico/buscadorPublico.xhtml"
+   }
+  ],
+  "dataSegmentation": {
+   "id": "2026-10",
+   "criteria": [
+    "añoPublicacionProceso",
+    "mesPublicacionProceso"
+   ]
+  }
+ },
+ {
+  "ocid": "ocds-dgv273-seacev3-1261357",
+  "id": "ocds-dgv273-seacev3-1261357-2026-10-29T10:24:52.277806-05:00",
+  "date": "2026-10-29T10:24:52.277793-05:00",
+  "publishedDate": "2026-10-29T10:24:52.277811-05:00",
+  "tag": [
+   "planning",
+   "tender"
+  ],
+  "initiationType": "tender",
+  "buyer": {
+   "id": "PE-CONSUCODE-1340",
+   "name": "MUNICIPALIDAD DISTRITAL DE SAN LUIS - LIMA"
+  },
+  "planning": {
+   "budget": {
+    "description": "Fondos Públicos",
+    "project": "MEJORAMIENTO DEL SERVICIO DE MOVILIDAD URBANA EN LA URBANIZACION EL TREBOL, DEL   DISTRITO DE SAN LUIS DE LA PROVINCIA DE LIMA DEL DEPARTAMENTO DE LIMA",
+    "projectID": "2730378"
+   }
+  },
+  "tender": {
+   "id": "1261357",
+   "title": "LP-ABR-7-2026-MDSL/CS-1",
+   "description": "MEJORAMIENTO DEL SERVICIO DE MOVILIDAD URBANA EN LA URBANIZACION EL TREBOL, DEL DISTRITO DE SAN LUIS, PROVINCIA LIMA, DEPARTAMENTO LIMA¿ I ETAPA, CON CUI N° 2730378",
+   "procuringEntity": {
+    "id": "PE-CONSUCODE-1340",
+    "name": "MUNICIPALIDAD DISTRITAL DE SAN LUIS - LIMA"
+   },
+   "datePublished": "2026-10-28T17:25:00-05:00",
+   "procurementMethodDetails": "Licitación Pública Abreviada",
+   "mainProcurementCategory": "works",
+   "additionalProcurementCategories": [
+    "works"
+   ],
+   "value": {
+    "amount": 222571.36,
+    "currency": "PEN",
+    "currencyName": "Soles",
+    "amount_PEN": 222571.36
+   },
+   "tenderPeriod": {
+    "startDate": "2026-10-28T00:00:00-05:00",
+    "endDate": "2026-10-28T00:00:00-05:00"
+   },
+   "enquiryPeriod": {
+    "startDate": "2026-10-29T00:01:00-05:00",
+    "endDate": "2026-11-02T23:59:00-05:00",
+    "durationInDays": 4
+   },
+   "items": [
+    {
+     "id": "21402752",
+     "position": "1",
+     "description": "MEJORAMIENTO DEL SERVICIO DE MOVILIDAD URBANA EN LA URBANIZACION EL TREBOL, DEL DISTRITO DE SAN LUIS, PROVINCIA LIMA, DEPARTAMENTO LIMA¿ I ETAPA, CON CUI N° 2730378",
+     "statusDetails": "CONVOCADO",
+     "status": "active",
+     "classification": {
+      "id": "7214100300342329",
+      "description": "MEJORAMIENTO DE PISTAS Y VEREDAS",
+      "scheme": "CUBSO"
+     },
+     "additionalClassifications": [
+      {
+       "id": "72141003",
+       "description": "Servicios de mantenimiento de pistas y carreteras",
+       "scheme": "UNSPSC"
+      }
+     ],
+     "quantity": 1.0,
+     "totalValue": {
+      "amount": 222571.36,
+      "currency": "PEN",
+      "currencyName": "Soles"
+     },
+     "unit": {
+      "id": "36",
+      "name": "Servicio",
+      "scheme": "PE-SEACE3-UnidadMedida"
+     }
+    }
+   ],
+   "documents": [
+    {
+     "id": "24831474986145852",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=0955971b-391e-45ae-95b6-93d48106a085",
+     "datePublished": "2026-10-28T17:25:00-05:00",
+     "format": "pdf",
+     "documentType": "biddingDocuments",
+     "title": "Bases Administrativas",
+     "language": "es"
+    }
+   ],
+   "hasTenderInformationProtectedByLaw": false
+  },
+  "parties": [
+   {
+    "id": "PE-CONSUCODE-1340",
+    "name": "MUNICIPALIDAD DISTRITAL DE SAN LUIS - LIMA",
+    "identifier": {
+     "id": "1340",
+     "scheme": "PE-CONSUCODE",
+     "legalName": "MUNICIPALIDAD DISTRITAL DE SAN LUIS - LIMA"
+    },
+    "additionalIdentifiers": [
+     {
+      "id": "20131378115",
+      "scheme": "PE-RUC",
+      "legalName": "MUNICIPALIDAD DISTRITAL DE SAN LUIS - LIMA"
+     }
+    ],
+    "address": {
+     "streetAddress": "AV. DEL AIRE URB.VILLA JARDIN Nº 1540",
+     "locality": "SAN LUIS",
+     "region": "LIMA",
+     "department": "LIMA",
+     "countryName": "PERU"
+    },
+    "roles": [
+     "buyer",
+     "procuringEntity"
+    ]
+   }
+  ],
+  "sources": [
+   {
+    "id": "seace_v3",
+    "name": "Sistema Electrónico de Contrataciones del Estado - Versión 3",
+    "url": "https://prodapp2.seace.gob.pe/seacebus-uiwd-pub/buscadorPublico/buscadorPublico.xhtml"
+   }
+  ],
+  "dataSegmentation": {
+   "id": "2026-10",
+   "criteria": [
+    "añoInicioConvocatoria",
+    "mesInicioConvocatoria"
+   ]
+  }
+ },
+ {
+  "ocid": "ocds-dgv273-seacev3-1259973",
+  "id": "ocds-dgv273-seacev3-1259973-2026-10-29T10:24:51.555925-05:00",
+  "date": "2026-10-29T10:24:51.555912-05:00",
+  "publishedDate": "2026-10-29T10:24:51.555931-05:00",
+  "tag": [
+   "planning",
+   "tender"
+  ],
+  "initiationType": "tender",
+  "buyer": {
+   "id": "PE-CONSUCODE-1160",
+   "name": "MUNICIPALIDAD DISTRITAL DE PANGOA"
+  },
+  "planning": {
+   "budget": {
+    "description": "Fondos Públicos",
+    "project": "CREACION DEL SERVICIO DE MOVILIDAD URBANA EN LAS VIAS LOCALES EN EL CENTRO POBLADO SAN JOSE DE MIRAFLORES DEL   DISTRITO DE PANGOA DE LA PROVINCIA DE SATIPO DEL DEPARTAMENTO DE JUNIN",
+    "projectID": "2684289"
+   }
+  },
+  "tender": {
+   "id": "1259973",
+   "title": "CP-ABR-6-2026-CS/MDP-2",
+   "description": "CONTRATACIÓN DE CONSULTORIA DE OBRA PARA LA SUPERVISION DE LA OBRA ¿CREACIÓN DEL SERVICIO DE MOVILIDAD URBANA EN LAS VÍAS LOCALES EN EL CENTRO POBLADO SAN JOSE DE MIRAFLORES DEL DISTRITO DE PANGOA DE LA PROVINCIA DE SATIPO DEL DEPARTAMENTO DE JUNÍN¿ CON CUI N° 2684289.",
+   "procuringEntity": {
+    "id": "PE-CONSUCODE-1160",
+    "name": "MUNICIPALIDAD DISTRITAL DE PANGOA"
+   },
+   "datePublished": "2026-10-07T23:36:00-05:00",
+   "procurementMethodDetails": "Concurso Público Abreviado",
+   "mainProcurementCategory": "services",
+   "additionalProcurementCategories": [
+    "services"
+   ],
+   "value": {
+    "amount": 408026.71,
+    "currency": "PEN",
+    "currencyName": "Soles",
+    "amount_PEN": 408026.71
+   },
+   "tenderPeriod": {
+    "startDate": "2026-10-07T00:00:00-05:00",
+    "endDate": "2026-10-07T00:00:00-05:00"
+   },
+   "enquiryPeriod": {
+    "startDate": "2026-10-08T00:01:00-05:00",
+    "endDate": "2026-10-13T23:59:00-05:00",
+    "durationInDays": 5
+   },
+   "tenderers": [
+    {
+     "id": "PE-RUC-1846040",
+     "name": "CONSORCIO PRISMA"
+    },
+    {
+     "id": "PE-RUC-1846190",
+     "name": "CONSORCIO SUPERVISOR SAN JOSE"
+    },
+    {
+     "id": "PE-RUC-10282723595",
+     "name": "JERI GODOY GUIDO BENJAMIN"
+    },
+    {
+     "id": "PE-RUC-10199360430",
+     "name": "GARCIA OLIVERA JHONY RICHARD"
+    },
+    {
+     "id": "PE-RUC-10294564662",
+     "name": "VALENZUELA SALAS ANTONIO"
+    },
+    {
+     "id": "PE-RUC-10106595807",
+     "name": "MENDOZA PICOAGA CARLOS HUMBERTO"
+    },
+    {
+     "id": "PE-RUC-10455522086",
+     "name": "SALAZAR BARZOLA JOSE LUIS"
+    },
+    {
+     "id": "PE-RUC-10719338882",
+     "name": "ENRIQUEZ PINEDO JHIM ERICK"
+    },
+    {
+     "id": "PE-RUC-20615390730",
+     "name": "OBRAS INNOTEC S.A.C."
+    },
+    {
+     "id": "PE-RUC-20611765038",
+     "name": "CONSTRUCTORA YANCE E.I.R.L."
+    },
+    {
+     "id": "PE-RUC-10267222849",
+     "name": "BUSTAMANTE MARRUFO LUCIO"
+    },
+    {
+     "id": "PE-RUC-10419609973",
+     "name": "INOÑAN CIENFUEGOS RODOLFO ANTONIO"
+    },
+    {
+     "id": "PE-RUC-20604859159",
+     "name": "MAC CONSULTORES E.I.R.L."
+    },
+    {
+     "id": "PE-RUC-10404896879",
+     "name": "ATENCIO YUCRA FLORENTINO ELVIS"
+    }
+   ],
+   "numberOfTenderers": 14,
+   "items": [
+    {
+     "id": "21396976",
+     "position": "1",
+     "description": "CONTRATACIÓN DE CONSULTORIA DE OBRA PARA LA SUPERVISION DE LA OBRA ¿CREACIÓN DEL SERVICIO DE MOVILIDAD URBANA EN LAS VÍAS LOCALES EN EL CENTRO POBLADO SAN JOSE DE MIRAFLORES DEL DISTRITO DE PANGOA DE LA PROVINCIA DE SATIPO DEL DEPARTAMENTO DE JUNÍN¿",
+     "statusDetails": "DESIERTO",
+     "status": "unsuccessful",
+     "classification": {
+      "id": "8110151000336392",
+      "description": "SUPERVISION DE OBRA DE CONSTRUCCION DE CARRETERAS CON PAVIMENTOS ASFALTICOS O CONCRETO",
+      "scheme": "CUBSO"
+     },
+     "additionalClassifications": [
+      {
+       "id": "81101510",
+       "description": "Ingeniería de carreteras",
+       "scheme": "UNSPSC"
+      }
+     ],
+     "quantity": 1.0,
+     "totalValue": {
+      "amount": 408026.71,
+      "currency": "PEN",
+      "currencyName": "Soles"
+     },
+     "unit": {
+      "id": "36",
+      "name": "Servicio",
+      "scheme": "PE-SEACE3-UnidadMedida"
+     }
+    }
+   ],
+   "documents": [
+    {
+     "id": "24831474986138034",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=ca1d0de1-8c8e-4cdf-b4e1-f7905d0af880",
+     "datePublished": "2026-10-07T23:36:00-05:00",
+     "dateModified": "2026-10-21T19:52:18-05:00",
+     "format": "pdf",
+     "documentType": "biddingDocuments",
+     "title": "Bases Administrativas",
+     "language": "es"
+    },
+    {
+     "id": "24831474986138035",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=b2e4178e-b8c6-4a00-a5aa-e32a940668fc",
+     "datePublished": "2026-10-07T23:36:00-05:00",
+     "dateModified": "2026-10-21T19:52:18-05:00",
+     "format": "pdf",
+     "documentType": "evaluationReports",
+     "title": "Informe que sustenta la declaratoria de Desierto",
+     "language": "es"
+    },
+    {
+     "id": "24831474986146604",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=34978e89-16f3-4225-b92f-b03124fb7a3a",
+     "datePublished": "2026-10-28T23:27:50-05:00",
+     "format": "zip",
+     "documentType": "biddingDocuments",
+     "title": "Documentos de Presentación de Propuestas",
+     "language": "es"
+    },
+    {
+     "id": "24831474986146605",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=3ad051a8-1d07-41f1-a294-bd12b7af5472",
+     "datePublished": "2026-10-28T23:27:51-05:00",
+     "format": "zip",
+     "documentType": "evaluationReports",
+     "title": "Documentos de Calificación y Evaluación",
+     "language": "es"
+    },
+    {
+     "id": "24831474986146606",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=b6ce3e12-f6d4-4e42-9282-46187ac9ec5d",
+     "datePublished": "2026-10-28T23:27:51-05:00",
+     "format": "zip",
+     "documentType": "awardNotice",
+     "title": "Documentos de Otorgamiento de Buena Pro",
+     "language": "es"
+    },
+    {
+     "id": "24831474986138115",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=4eb6c6e8-663c-4210-ae2a-b971719c493b",
+     "datePublished": "2026-10-21T19:52:18-05:00",
+     "dateModified": "2026-10-21T19:52:18-05:00",
+     "format": "pdf",
+     "documentType": "clarifications",
+     "title": "Pliego de absolución de consultas y observaciones",
+     "language": "es"
+    },
+    {
+     "id": "24831474986138116",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=0968ec66-affe-40d7-ae95-f4a963e2e334",
+     "datePublished": "2026-10-21T19:52:18-05:00",
+     "dateModified": "2026-10-21T19:52:18-05:00",
+     "format": "pdf",
+     "documentType": "biddingDocuments",
+     "title": "Bases Integradas",
+     "language": "es"
+    }
+   ],
+   "hasTenderInformationProtectedByLaw": false
+  },
+  "parties": [
+   {
+    "id": "PE-CONSUCODE-1160",
+    "name": "MUNICIPALIDAD DISTRITAL DE PANGOA",
+    "identifier": {
+     "id": "1160",
+     "scheme": "PE-CONSUCODE",
+     "legalName": "MUNICIPALIDAD DISTRITAL DE PANGOA"
+    },
+    "additionalIdentifiers": [
+     {
+      "id": "20146673776",
+      "scheme": "PE-RUC",
+      "legalName": "MUNICIPALIDAD DISTRITAL DE PANGOA"
+     }
+    ],
+    "address": {
+     "streetAddress": "CALLE 7 DE JUNIO NO 641",
+     "locality": "PANGOA",
+     "region": "SATIPO",
+     "department": "JUNIN",
+     "countryName": "PERU"
+    },
+    "contactPoint": {
+     "telephone": "064-543182",
+     "url": "https://WWW.MUNIPANGOA.GOB.PE"
+    },
+    "roles": [
+     "buyer",
+     "procuringEntity"
+    ]
+   },
+   {
+    "id": "PE-RUC-1846040",
+    "name": "CONSORCIO PRISMA",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "1846040",
+     "legalName": "CONSORCIO PRISMA"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-1846190",
+    "name": "CONSORCIO SUPERVISOR SAN JOSE",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "1846190",
+     "legalName": "CONSORCIO SUPERVISOR SAN JOSE"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-10282723595",
+    "name": "JERI GODOY GUIDO BENJAMIN",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "10282723595",
+     "legalName": "JERI GODOY GUIDO BENJAMIN"
+    },
+    "address": {
+     "countryName": "PERU"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-10199360430",
+    "name": "GARCIA OLIVERA JHONY RICHARD",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "10199360430",
+     "legalName": "GARCIA OLIVERA JHONY RICHARD"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-10294564662",
+    "name": "VALENZUELA SALAS ANTONIO",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "10294564662",
+     "legalName": "VALENZUELA SALAS ANTONIO"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-10106595807",
+    "name": "MENDOZA PICOAGA CARLOS HUMBERTO",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "10106595807",
+     "legalName": "MENDOZA PICOAGA CARLOS HUMBERTO"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-10455522086",
+    "name": "SALAZAR BARZOLA JOSE LUIS",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "10455522086",
+     "legalName": "SALAZAR BARZOLA JOSE LUIS"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-10719338882",
+    "name": "ENRIQUEZ PINEDO JHIM ERICK",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "10719338882",
+     "legalName": "ENRIQUEZ PINEDO JHIM ERICK"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-20615390730",
+    "name": "OBRAS INNOTEC S.A.C.",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "20615390730",
+     "legalName": "OBRAS INNOTEC S.A.C."
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-20611765038",
+    "name": "CONSTRUCTORA YANCE E.I.R.L.",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "20611765038",
+     "legalName": "CONSTRUCTORA YANCE E.I.R.L."
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-10267222849",
+    "name": "BUSTAMANTE MARRUFO LUCIO",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "10267222849",
+     "legalName": "BUSTAMANTE MARRUFO LUCIO"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-10419609973",
+    "name": "INOÑAN CIENFUEGOS RODOLFO ANTONIO",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "10419609973",
+     "legalName": "INOÑAN CIENFUEGOS RODOLFO ANTONIO"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-20604859159",
+    "name": "MAC CONSULTORES E.I.R.L.",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "20604859159",
+     "legalName": "MAC CONSULTORES E.I.R.L."
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   },
+   {
+    "id": "PE-RUC-10404896879",
+    "name": "ATENCIO YUCRA FLORENTINO ELVIS",
+    "identifier": {
+     "scheme": "PE-RUC",
+     "id": "10404896879",
+     "legalName": "ATENCIO YUCRA FLORENTINO ELVIS"
+    },
+    "contactPoint": {
+     "email": "Ver datos en Ficha del Proveedor",
+     "telephone": "Ver dato en ficha del proveedor"
+    },
+    "roles": [
+     "tenderer"
+    ]
+   }
+  ],
+  "sources": [
+   {
+    "id": "seace_v3",
+    "name": "Sistema Electrónico de Contrataciones del Estado - Versión 3",
+    "url": "https://prodapp2.seace.gob.pe/seacebus-uiwd-pub/buscadorPublico/buscadorPublico.xhtml"
+   }
+  ],
+  "dataSegmentation": {
+   "id": "2026-10",
+   "criteria": [
+    "añoInicioConvocatoria",
+    "mesInicioConvocatoria"
+   ]
+  }
+ },
+ {
+  "ocid": "ocds-dgv273-seacev3-1260486",
+  "id": "ocds-dgv273-seacev3-1260486-2026-10-29T10:24:47.119618-05:00",
+  "date": "2026-10-29T10:24:47.119604-05:00",
+  "publishedDate": "2026-10-29T10:24:47.119623-05:00",
+  "tag": [
+   "planning",
+   "tender"
+  ],
+  "initiationType": "tender",
+  "buyer": {
+   "id": "PE-CONSUCODE-622",
+   "name": "MUNICIPALIDAD DISTRITAL DE MAGDALENA - CAJAMARCA"
+  },
+  "planning": {
+   "budget": {
+    "description": "Fondos Públicos",
+    "project": "MEJORAMIENTO Y AMPLIACION DEL SERVICIO DE AGUA POTABLE RURAL Y CREACION DEL SERVICIO DE ALCANTARILLADO U OTRAS FORMAS DE DISPOSICIÓN SANITARIA DE EXCRETAS EN SISTEMA DE AGUA POTABLE Y SANEAMIENTO  DE CENTRO POBLADO SUCCHABAMBA DISTRITO DE MAGDALENA DE LA PROVINCIA DE CAJAMARCA DEL DEPARTAMENTO DE CAJAMARCA",
+    "projectID": "2618259"
+   }
+  },
+  "tender": {
+   "id": "1260486",
+   "title": "CP-ABR-3-2026-MDM/C-1",
+   "description": "CONTRATACIÓN DE CONSULTORÍA DE OBRA PARA LA SUPERVISIÓN DE LA OBRA: MEJORAMIENTO Y AMPLIACIÓN DEL SERVICIO DE AGUA POTABLE RURAL Y CREACION DEL SERVICIO DE ALCANTARILLADO U OTRAS FORMAS DE DISPOSICIÓN DE SANITARIA DE EXCRETAS EN SISTEMA DE AGUA POTABLE Y SANEMIENTO DEL CENTRO POBLADO DE SUCCHABAMB",
+   "procuringEntity": {
+    "id": "PE-CONSUCODE-622",
+    "name": "MUNICIPALIDAD DISTRITAL DE MAGDALENA - CAJAMARCA"
+   },
+   "datePublished": "2026-10-28T16:57:00-05:00",
+   "procurementMethodDetails": "Concurso Público Abreviado",
+   "mainProcurementCategory": "services",
+   "additionalProcurementCategories": [
+    "services"
+   ],
+   "value": {
+    "amount": 0.0,
+    "currency": "PEN",
+    "currencyName": "Soles",
+    "amount_PEN": 0.0
+   },
+   "tenderPeriod": {
+    "startDate": "2026-10-28T00:00:00-05:00",
+    "endDate": "2026-10-28T00:00:00-05:00"
+   },
+   "enquiryPeriod": {
+    "startDate": "2026-10-29T00:01:00-05:00",
+    "endDate": "2026-11-02T23:59:00-05:00",
+    "durationInDays": 4
+   },
+   "items": [
+    {
+     "id": "21399220",
+     "position": "1",
+     "description": "CONSULTORÍA DE OBRA\\nPARA LA SUPERVISIÓN DE LA OBRA: MEJORAMIENTO Y AMPLIACIÓN DEL SERVICIO DE AGUA POTABLE RURAL Y CREACION DEL SERVICIO DE ALCANTARILLADO U OTRAS FORMAS DE DISPOSICIÓN DE SANITARIA DE EXCRETAS EN SISTEMA DE AGUA POTABLE Y SANEMIENTO",
+     "statusDetails": "CONVOCADO",
+     "status": "active",
+     "classification": {
+      "id": "8110151500364447",
+      "description": "SUPERVISION DE OBRA DE AMPLIACION DEL SISTEMA DE AGUA POTABLE Y ALCANTARILLADO",
+      "scheme": "CUBSO"
+     },
+     "additionalClassifications": [
+      {
+       "id": "81101515",
+       "description": "Ingeniería de infraestructura de plantas o instalaciones",
+       "scheme": "UNSPSC"
+      }
+     ],
+     "quantity": 1.0,
+     "totalValue": {
+      "amount": 0.0,
+      "currency": "PEN",
+      "currencyName": "Soles"
+     },
+     "unit": {
+      "id": "36",
+      "name": "Servicio",
+      "scheme": "PE-SEACE3-UnidadMedida"
+     }
+    }
+   ],
+   "documents": [
+    {
+     "id": "24831474986145735",
+     "url": "https://prod1.seace.gob.pe/SeaceWeb-PRO/SdescargarArchivoAlfresco?fileCode=73e295b6-91ce-4b9d-9d47-3149570d4919",
+     "datePublished": "2026-10-28T16:57:00-05:00",
+     "format": "pdf",
+     "documentType": "biddingDocuments",
+     "title": "Bases Administrativas",
+     "language": "es"
+    }
+   ],
+   "hasTenderInformationProtectedByLaw": false
+  },
+  "parties": [
+   {
+    "id": "PE-CONSUCODE-622",
+    "name": "MUNICIPALIDAD DISTRITAL DE MAGDALENA - CAJAMARCA",
+    "identifier": {
+     "id": "622",
+     "scheme": "PE-CONSUCODE",
+     "legalName": "MUNICIPALIDAD DISTRITAL DE MAGDALENA - CAJAMARCA"
+    },
+    "additionalIdentifiers": [
+     {
+      "id": "20188992057",
+      "scheme": "PE-RUC",
+      "legalName": "MUNICIPALIDAD DISTRITAL DE MAGDALENA - CAJAMARCA"
+     }
+    ],
+    "address": {
+     "streetAddress": "JR JOSE OLAYA N° 146",
+     "locality": "MAGDALENA",
+     "region": "CAJAMARCA",
+     "department": "CAJAMARCA",
+     "countryName": "PERU"
+    },
+    "roles": [
+     "buyer",
+     "procuringEntity"
+    ]
+   }
+  ],
+  "sources": [
+   {
+    "id": "seace_v3",
+    "name": "Sistema Electrónico de Contrataciones del Estado - Versión 3",
+    "url": "https://prodapp2.seace.gob.pe/seacebus-uiwd-pub/buscadorPublico/buscadorPublico.xhtml"
+   }
+  ],
+  "dataSegmentation": {
+   "id": "2026-10",
+   "criteria": [
+    "añoInicioConvocatoria",
+    "mesInicioConvocatoria"
+   ]
+  }
+ }
+]

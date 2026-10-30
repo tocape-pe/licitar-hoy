@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ titulo }}</title>
+{% if descripcion %}<meta name="description" content="{{ descripcion }}">{% endif %}
+<link rel="canonical" href="{{ canonical }}">
+<meta name="robots" content="{{ 'index,follow,max-snippet:-1,max-image-preview:large' if indexable else 'noindex,follow' }}">
+<meta name="theme-color" content="#14284b">
+<meta property="og:locale" content="es_PE">
+<meta property="og:site_name" content="{{ marca }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ h1 }}">
+{% if descripcion %}<meta property="og:description" content="{{ descripcion }}">{% endif %}
+<meta property="og:url" content="{{ canonical }}">
+<style>{{ css | safe }}</style>
+{% for bloque in ld %}<script type="application/ld+json">{{ ld_json(bloque) | safe }}</script>
+{% endfor %}
+<!-- Visitas anónimas, sin cookies (GoatCounter) -->
+<script>window.goatcounter = {path: function (p) { return location.host + p }}</script>
+<script data-goatcounter="https://3b3n3z3r333.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cab">
+  <div class="envoltura cab-fila">
+    <a class="marca" href="{{ url('/') }}" aria-label="{{ marca }}, inicio"><b>Licitar <span>Hoy</span></b></a>
+    <nav class="cab-nav" aria-label="Principal">
+      <a href="{{ url('/esta-semana/') }}">Esta semana</a>
+      <a href="{{ url('/objeto/obras/') }}">Obras</a>
+      <a href="{{ url('/objeto/bienes/') }}">Bienes</a>
+      <a href="{{ url('/objeto/servicios/') }}">Servicios</a>
+    </nav>
+  </div>
+</header>
+<main id="contenido" class="envoltura">
+{% if migas and migas|length > 1 %}
+<nav class="migas" aria-label="Migas de pan"><ol>
+  {% for nombre, p in migas %}
+  <li>{% if p %}<a href="{{ url(p) }}">{{ nombre }}</a>{% else %}<span aria-current="page">{{ nombre }}</span>{% endif %}</li>
+  {% endfor %}
+</ol></nav>
+{% endif %}
+{% block contenido %}{% endblock %}
+</main>
+<footer class="pie">
+  <div class="envoltura">
+    <h2 class="pie-titulo">Licitaciones por departamento</h2>
+    <ul class="pie-deps">
+      {% for d in departamentos %}<li><a href="{{ url(d.path) }}">{{ d.nombre }}</a></li>{% endfor %}
+    </ul>
+    <h2 class="pie-titulo">Por rubro</h2>
+    <p class="pie-links">{% for r in rubros %}{{ ' · ' if not loop.first }}<a href="{{ url(r.path) }}">{{ r.nombre }}</a>{% endfor %}</p>
+    <h2 class="pie-titulo">Por monto</h2>
+    <p class="pie-links">{% for r in rangos %}{{ ' · ' if not loop.first }}<a href="{{ url(r.path) }}">{{ r.nombre }}</a>{% endfor %}</p>
+    <p class="pie-fuente">Datos del <a href="{{ fuente_url }}" rel="noopener">{{ fuente }}</a> (licencia <a href="{{ licencia_url }}" rel="noopener license">CC BY 4.0</a>), procesados por {{ marca }} y actualizados el {{ actualizado_txt }}. {{ marca }} no es el OECE ni una entidad del Estado, no cobra y no pide datos personales. Verifica siempre en la ficha oficial.</p>
+    <p class="pie-links"><a href="{{ url('/acerca/') }}">Acerca</a> · <a href="{{ url('/aviso-legal/') }}">Aviso legal</a> · <a href="{{ url('/privacidad/') }}">Privacidad</a> · <a href="https://chambearhoy.toca.pe/">Trabajos en el Estado (Chamba al Toque)</a></p>
+    <p><a class="pie-contacto" href="https://toca.pe/#contacto">Contacto</a></p>
+  </div>
+</footer>
+{% block scripts %}{% endblock %}
+</body>
+</html>

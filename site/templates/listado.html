@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% from "_tarjeta.html" import tarjeta %}
+{% block contenido %}
+<header class="l-cab">
+  <h1>{{ h1 }}{% if pagina > 1 %} <span class="l-pag">(página {{ pagina }})</span>{% endif %}</h1>
+  {% if pagina == 1 %}
+  <p class="l-resumen">{{ plural(resumen.n, 'licitación vigente', 'licitaciones vigentes') }}{% if resumen.semana %} · <strong>{{ plural(resumen.semana, 'cierra', 'cierran') }} consultas esta semana</strong>{% endif %}{% if resumen.suma_txt %} · {{ resumen.suma_txt }} en montos publicados{% endif %}</p>
+  {% if intro %}<p class="l-intro">{{ intro }}</p>{% endif %}
+  {% endif %}
+  <p class="l-act">Actualizado el {{ actualizado_txt }}. Ordenadas por fecha límite de consultas.</p>
+</header>
+{% if avisos %}
+<div class="rejilla">
+  {% for a in avisos %}{{ tarjeta(a, mostrar_lugar=extra.tipo != 'departamento', nivel=2) }}{% endfor %}
+</div>
+{% else %}
+<p class="vacio">Hoy no hay licitaciones vigentes aquí. Revisa <a href="{{ url('/esta-semana/') }}">las que cierran esta semana</a> en todo el país.</p>
+{% endif %}
+{% if paginas > 1 %}
+<nav class="paginacion" aria-label="Páginas">
+  {% for n in range(1, paginas + 1) %}
+    {% if n == pagina %}<span aria-current="page">{{ n }}</span>
+    {% elif n == 1 or n == paginas or (n - pagina)|abs <= 2 %}<a href="{{ url(base_listado if n == 1 else base_listado ~ 'pagina/' ~ n ~ '/') }}">{{ n }}</a>
+    {% elif (n - pagina)|abs == 3 %}<span class="pag-hueco">…</span>{% endif %}
+  {% endfor %}
+</nav>
+{% endif %}
+{% if pagina == 1 and resumen.top and extra.tipo != 'entidad' %}
+<section class="bloque">
+  <h2>Entidades con más licitaciones aquí</h2>
+  <ul class="entidades">
+    {% for e in resumen.top %}<li>{% if e.indexable %}<a href="{{ url('/entidad/' ~ e.slug ~ '/') }}">{{ e.nombre }}</a>{% else %}<span class="e-nombre">{{ e.nombre }}</span>{% endif %}<span>{{ e.n }}</span></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

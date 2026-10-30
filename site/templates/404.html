@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="texto">
+  <h1>{{ h1 }}</h1>
+  <p>Puede que la licitación haya salido de convocatoria o que el enlace esté mal escrito.</p>
+  <p><a class="boton" href="{{ url('/esta-semana/') }}">Ver las que cierran esta semana</a></p>
+</div>
+{% endblock %}

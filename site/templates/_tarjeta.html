@@ -1,0 +1,16 @@
+{% macro tarjeta(a, mostrar_lugar=True, nivel=3) %}
+<article class="tarjeta{{ ' cerrada' if a.cerrado }}">
+  <p class="t-entidad">{{ a.entidad_txt }}</p>
+  <h{{ nivel }} class="t-que"><a href="{{ url(a.path) }}">{{ a.corta[:1]|upper }}{{ a.corta[1:] }}</a></h{{ nivel }}>
+  <p class="t-datos">
+    {% if a.monto_txt %}<strong class="t-monto">{{ a.monto_txt }}</strong>{% else %}<span class="t-monto t-sin">Monto no publicado</span>{% endif %}
+    <span class="t-tipo">{{ a.objeto or 'Contratación' }} · {{ a.tipo }}</span>
+    {% if mostrar_lugar %}<span class="t-lugar">{{ a.dep_txt }}</span>{% endif %}
+  </p>
+  <p class="t-plazo">
+    {% if a.consultas_txt %}<time class="t-cierre{{ ' urgente' if a.urgente }}" datetime="{{ a.consultas_fin[:10] }}">{{ a.consultas_txt }}</time>{% endif %}
+    {% if a.segunda %}<span class="t-chip">{{ a.convocatoria_n }}.ª convocatoria</span>{% endif %}
+  </p>
+  <span class="t-ver" aria-hidden="true">{{ a.nomenclatura }}</span>
+</article>
+{% endmacro %}

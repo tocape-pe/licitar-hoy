@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% from "_tarjeta.html" import tarjeta %}
+{% block contenido %}
+<article class="aviso">
+  {% if a.cerrado %}
+  <p class="aviso-cerrado">Este procedimiento ya no está en convocatoria{% if a.estado %}: figura como <strong>{{ a.estado|lower }}</strong>{% endif %}. Se conserva como referencia.</p>
+  {% endif %}
+  <p class="a-entidad">{% if entidad_indexable.get(a.entidad_slug) and not a.cerrado %}<a href="{{ url('/entidad/' ~ a.entidad_slug ~ '/') }}">{{ a.entidad_txt }}</a>{% else %}{{ a.entidad_txt }}{% endif %}</p>
+  <h1>{{ h1 }}</h1>
+
+  <dl class="a-claves">
+    <div><dt>Monto</dt><dd class="a-monto">{{ a.monto_txt or 'No publicado' }}</dd></div>
+    <div><dt>Consultas y observaciones</dt><dd>{% if a.consultas_fin %}{% if a.dias is not none and a.dias >= 0 %}<time class="a-cierre{{ ' urgente' if a.urgente }}" datetime="{{ a.consultas_fin[:10] }}">{{ a.consultas_txt }}</time>{% else %}Cerraron el {{ fecha_larga(a.consultas_fin) }}{% endif %}{% else %}Sin plazo en los datos abiertos{% endif %}</dd></div>
+    <div><dt>Objeto</dt><dd>{{ a.objeto or 'No indicado' }}</dd></div>
+    <div><dt>Departamento de la entidad</dt><dd>{{ a.lugar_txt }}</dd></div>
+    <div><dt>Procedimiento</dt><dd>{{ a.tipo or 'No indicado' }}{% if a.tipo_txt %}<small>{{ a.tipo_txt }}</small>{% endif %}</dd></div>
+    <div><dt>Nomenclatura</dt><dd class="a-nomen">{{ a.nomenclatura }}</dd></div>
+  </dl>
+
+  {% if a.segunda %}<p class="a-nota"><strong>{{ a.convocatoria_n }}.ª convocatoria:</strong> el número final de la nomenclatura indica que la convocatoria anterior no llegó a contratarse.</p>{% endif %}
+  {% if a.reemplaza %}<p class="a-nota"><strong>Relanzada:</strong> la entidad volvió a convocar este mismo procedimiento con otro registro; el anterior figura como anulado o sin efecto.</p>{% endif %}
+
+  <p class="a-cta"><a class="boton" href="{{ a.url }}" rel="noopener">Ver la ficha oficial en el OECE</a>
+  <span class="a-cta-nota">Para participar, regístrate en el <a href="{{ seace_url }}" rel="noopener">SEACE</a> con tu usuario del RNP antes de que cierre el registro de participantes.</span></p>
+
+  <section class="a-seccion">
+    <h2>Qué se contrata</h2>
+    <p>{{ a.descripcion_txt }}</p>
+    {% if a.items_txt %}
+    {% if not a.item_repite %}<h3 class="a-items-tit">{{ plural(a.items_txt|length, 'ítem', 'ítems') }}</h3>{% endif %}
+    <ol class="a-items">
+      {% for i in a.items_txt %}
+      <li>
+        {% if not a.item_repite %}<p class="a-item-que">{{ i.descripcion_txt }}</p>{% endif %}
+        <p class="a-item-datos">{% if i.cantidad_txt %}<span>Cantidad: <strong>{{ i.cantidad_txt }}</strong></span>{% endif %}<span>Monto: <strong>{{ i.monto_txt or 'no publicado' }}</strong></span>{% if i.estado %}<span>Estado: <strong>{{ i.estado|capitalize }}</strong></span>{% endif %}</p>
+      </li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+  </section>
+
+  <section class="a-seccion">
+    <h2>Fechas</h2>
+    <dl class="a-fechas">
+      <div><dt>Convocatoria</dt><dd>{{ fecha_larga(a.publicado) or 'No indicada' }}</dd></div>
+      <div><dt>Consultas y observaciones</dt><dd>{% if a.consultas_fin %}del {{ fecha_larga(a.consultas_inicio) }} al {{ fecha_larga(a.consultas_fin) }}{% else %}No indicadas en los datos abiertos{% endif %}</dd></div>
+      <div><dt>Registro de participantes, ofertas y buena pro</dt><dd>No vienen en los datos abiertos del OECE. Revisa el cronograma en la <a href="{{ a.url }}" rel="noopener">ficha oficial</a> o en las bases.</dd></div>
+    </dl>
+  </section>
+
+  {% if a.documentos %}
+  <section class="a-seccion">
+    <h2>Documentos</h2>
+    <ul class="a-docs">
+      {% for d in a.documentos %}<li><a href="{{ d.url }}" rel="noopener nofollow">{{ d.titulo or 'Documento' }}</a>{% if d.formato %} <small>({{ d.formato|upper }}{% if d.fecha %}, {{ fecha_corta(d.fecha) }}{% endif %})</small>{% endif %}</li>{% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if a.adjudicaciones_txt %}
+  <section class="a-seccion">
+    <h2>Resultado</h2>
+    <ul class="a-docs">
+      {% for x in a.adjudicaciones_txt %}<li><strong>{{ x.proveedor_txt }}</strong>{% if x.ruc %} (RUC {{ x.ruc }}){% endif %}{% if x.monto_txt %}: {{ x.monto_txt }}{% endif %}{% if x.fecha %}, {{ fecha_larga(x.fecha) }}{% endif %}</li>{% endfor %}
+    </ul>
+    {% if a.postores %}<p>Se presentaron {{ plural(a.postores, 'postor', 'postores') }}.</p>{% endif %}
+  </section>
+  {% endif %}
+
+  <aside class="a-confianza">
+    <p>Participar en una licitación del Estado no cuesta nada más allá de los requisitos de las bases. Nadie puede "asegurarte" la buena pro a cambio de dinero. {{ marca }} no es el OECE ni la entidad convocante. ¿Ves un error? <a href="{{ reportar(a) }}">Avísanos</a>.</p>
+  </aside>
+  <p class="a-fuente">Fuente: <a href="{{ a.url }}" rel="noopener">{{ fuente }}</a>, licencia CC BY 4.0. Datos al {{ fecha_larga(a.version) }}.</p>
+</article>
+
+{% if misma_entidad %}
+<section class="bloque">
+  <h2>Otras licitaciones {{ de_articulo(a.entidad_txt) }}</h2>
+  <div class="rejilla">{% for x in misma_entidad %}{{ tarjeta(x, mostrar_lugar=False) }}{% endfor %}</div>
+</section>
+{% endif %}
+{% if similares %}
+<section class="bloque">
+  <h2>Parecidas en {{ a.dep_txt }} y en el país</h2>
+  <div class="rejilla">{% for x in similares %}{{ tarjeta(x) }}{% endfor %}</div>
+</section>
+{% endif %}
+{% endblock %}

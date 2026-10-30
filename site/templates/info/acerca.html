@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="texto">
+<h1>{{ h1 }}</h1>
+<p>{{ marca }} junta en una lista fácil de revisar las licitaciones, concursos y subastas que convocan las entidades públicas del Perú, para que una pyme o un proveedor encuentre a tiempo lo que puede venderle al Estado.</p>
+<h2>De dónde salen los datos</h2>
+<p>Del <a href="{{ fuente_url }}" rel="noopener">{{ fuente }}</a>, que publica cada día los procedimientos registrados en el SEACE con el estándar de datos de contrataciones abiertas (OCDS) y licencia <a href="{{ licencia_url }}" rel="noopener license">CC BY 4.0</a>. {{ marca }} los descarga una vez al día, los ordena y los presenta; no cambia montos, fechas ni descripciones.</p>
+<h2>Qué datos no trae la fuente</h2>
+<ul>
+<li><strong>Fecha de presentación de ofertas y de buena pro.</strong> Los datos abiertos solo traen el plazo de consultas y observaciones. Las demás fechas están en el cronograma de la ficha oficial y en las bases.</li>
+<li><strong>Monto, en muchos casos.</strong> La mayoría de licitaciones de bienes y servicios no publica su monto en los datos abiertos. Cuando falta, mostramos "Monto no publicado".</li>
+<li><strong>Lugar de ejecución.</strong> El departamento que mostramos es el de la sede de la entidad.</li>
+<li><strong>Contrataciones menores</strong> (hasta 8 UIT): no están en estos datos.</li>
+</ul>
+<h2>Cada cuánto se actualiza</h2>
+<p>Una vez al día. El OECE publica su lote diario por la mañana con lo convocado hasta la noche anterior.</p>
+<h2>Quién lo hace</h2>
+<p>{{ marca }} es un proyecto independiente de <a href="https://toca.pe/">toca.pe</a>, que también hace <a href="https://chambearhoy.toca.pe/">Chamba al Toque</a> (convocatorias de trabajo en el Estado). No es el OECE ni una entidad pública. Para escribirnos, usa la <a href="https://toca.pe/#contacto">página de contacto</a>.</p>
+</div>
+{% endblock %}
