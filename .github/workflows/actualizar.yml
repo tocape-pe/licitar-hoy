@@ -1,0 +1,94 @@
+name: Actualizar licitaciones y publicar
+
+on:
+  schedule:
+    # El OECE publica su lote diario hacia las 10:30 de Lima (UTC-5). 11:30 lo
+    # recoge; 19:00 reintenta por si el lote llegó tarde.
+    - cron: "30 16 * * *"
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["scraper/**", "site/**", ".github/workflows/actualizar.yml"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: actualizar
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # para saber qué cambió en un push
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Pruebas
+        run: python -m pytest -q
+
+      - name: Datos anteriores (rama "data")
+        run: |
+          mkdir -p out
+          if git fetch --depth=1 origin data:data 2>/dev/null; then
+            git show data:avisos.json > previous.json || echo '{}' > previous.json
+            git show data:state.json > out/state.json || echo '{}' > out/state.json
+          else
+            echo '{}' > previous.json
+            echo '{}' > out/state.json
+          fi
+
+      - name: Descargar licitaciones del OECE
+        # Un push que solo cambia la web no vuelve a descargar: reutiliza los datos.
+        run: |
+          if [ "${{ github.event_name }}" = "push" ] && [ "$(cat previous.json)" != "{}" ] \
+             && ! git diff --name-only HEAD~1 HEAD | grep -q '^scraper/'; then
+            cp previous.json out/avisos.json
+          else
+            python -m scraper --previous previous.json --output out/avisos.json
+          fi
+
+      - name: Generar el sitio
+        # Si la API trajo menos de la mitad de avisos vigentes que la vez anterior,
+        # build.py termina con error y no se publica ni se guardan los datos.
+        run: python site/build.py --data out/avisos.json --state out/state.json --out public
+
+      # Publicación apagada hasta crear la variable del repo PUBLICAR=true
+      # (Settings > Secrets and variables > Actions > Variables).
+      - if: vars.PUBLICAR == 'true'
+        uses: actions/configure-pages@v5
+      - if: vars.PUBLICAR == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - if: vars.PUBLICAR == 'true'
+        id: deploy
+        uses: actions/deploy-pages@v4
+
+      - name: Guardar datos en la rama "data"
+        # Un solo commit que reemplaza al anterior: el historial no crece.
+        run: |
+          mkdir -p data-branch && cp out/avisos.json out/state.json data-branch/
+          cd data-branch
+          git init -q -b data
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add avisos.json state.json
+          git commit -q -m "Avisos $(TZ=America/Lima date '+%Y-%m-%d %H:%M')"
+          git push -q --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
