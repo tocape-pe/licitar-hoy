@@ -119,3 +119,46 @@ def test_construye_sitio_completo(tmp_path):
     assert (pub / "adjudicadas" / "index.html").exists() and (pub / "glosario" / "index.html").exists()
     for indice in ("departamento", "rubro", "entidad", "objeto", "monto"):  # las migas no llevan a un 404
         assert (pub / indice / "index.html").exists()
+
+
+def test_palabras_busqueda_sin_tildes():
+    assert B.palabras_busqueda("CONSTRUCCIÓN de Pistas en CAJAMARCA") == ["construccion", "de", "pistas", "en", "cajamarca"]
+    assert B.palabras_busqueda("Nomenclatura LP-ABR-7-2026-MDSL/CS-1.") == ["nomenclatura", "lp-abr-7-2026-mdsl/cs-1"]
+    assert B.palabras_busqueda("Señalización") == ["senalizacion"]
+
+
+def test_indice_de_busqueda(tmp_path):
+    data = tmp_path / "avisos.json"
+    vigente = normalizar(CASOS["1261357"])
+    desierto = normalizar(CASOS["1259973"])
+    convenio = {**normalizar(CASOS["1261562"]), "ocid": "ocds-dgv273-seacev3-8888888", "id": "8888888",
+                "nomenclatura": "CONV-1-2026-PRUEBA", "tipo": "Convenio"}
+    avisos = [normalizar(r) for r in CASOS.values() if r["ocid"] != desierto["ocid"]] + [desierto, convenio]
+    data.write_text(json.dumps({"avisos": avisos}), encoding="utf-8")
+    assert B.main(["--data", str(data), "--out", str(tmp_path / "public"), "--hoy", "2026-10-29"]) == 0
+    pub = tmp_path / "public"
+
+    indice = json.loads((pub / "buscar" / "indice.json").read_text(encoding="utf-8"))
+    campos = indice["campos"]
+    assert campos == B.CAMPOS_INDICE and all(len(f) == len(campos) for f in indice["avisos"])
+    filas = [dict(zip(campos, f)) for f in indice["avisos"]]
+    esperado = sitio(avisos, hoy=date(2026, 10, 29))
+    # Todos los vigentes, en el mismo orden de los listados; ni cerrados ni convenios
+    assert [f["slug"] for f in filas] == [a["slug"] for a in esperado.vigentes]
+    nomenclaturas = {f["nomenclatura"] for f in filas}
+    assert desierto["nomenclatura"] not in nomenclaturas and "CONV-1-2026-PRUEBA" not in nomenclaturas
+    assert vigente["nomenclatura"] in nomenclaturas
+    for f in filas:  # cada resultado lleva a una ficha que existe
+        assert (pub / "licitacion" / f["slug"] / "index.html").exists()
+        assert f["palabras"] == B.T._sin_tildes(f["palabras"]).lower()  # sin tildes ni mayúsculas
+    assert set(indice["deps"]) == {f["dep"] for f in filas}
+
+    buscar = (pub / "buscar" / "index.html").read_text(encoding="utf-8")
+    assert 'content="noindex' in buscar and "/buscar/indice.json?v=" in buscar
+    assert "/buscar/" not in "".join(p.read_text(encoding="utf-8") for p in pub.glob("sitemap*.xml"))
+    portada = (pub / "index.html").read_text(encoding="utf-8")
+    assert '"@type":"SearchAction"' in portada
+    assert '"urlTemplate":"https://licitarhoy.toca.pe/buscar/?q={search_term_string}"' in portada
+    assert (pub / "buscar.js").exists()
+    aviso = next((pub / "licitacion").glob("*1261357/index.html")).read_text(encoding="utf-8")
+    assert 'class="cab-buscar"' in aviso and 'action="/buscar/"' in aviso  # buscador en el encabezado

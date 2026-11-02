@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "_buscador.html" import buscador %}
+{% block contenido %}
+<header class="l-cab">
+  <h1>{{ h1 }}</h1>
+  <p class="l-act">Entre las {{ miles(total_vigentes) }} licitaciones vigentes, actualizadas el {{ actualizado_txt }}. Ordenadas por fecha límite de consultas.</p>
+</header>
+{{ buscador('pagina', indice_url) }}
+<section class="b-zona" id="b-zona" aria-label="Resultados">
+  <p class="b-estado" id="b-estado" role="status" aria-live="polite"></p>
+  <div class="rejilla" id="b-resultados" data-nivel="2"></div>
+  <p class="mas" id="b-mas" hidden><button class="b-boton b-mas" type="button">Mostrar más resultados</button></p>
+</section>
+<noscript><p class="vacio">El buscador necesita JavaScript. También puedes ver las licitaciones <a href="{{ url('/departamento/') }}">por departamento</a>, <a href="{{ url('/rubro/') }}">por rubro</a> o <a href="{{ url('/objeto/') }}">por tipo</a>.</p></noscript>
+{% endblock %}
+{% block scripts %}<script src="{{ buscar_js }}" defer></script>{% endblock %}

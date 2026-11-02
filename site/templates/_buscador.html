@@ -1,0 +1,22 @@
+{# Formulario del buscador (portada y /buscar/). Sin JS manda a /buscar/?q=…; con JS
+   static/buscar.js filtra el índice al escribir. #}
+{% macro buscador(modo, indice) %}
+<form class="buscador" action="{{ url('/buscar/') }}" method="get" role="search" data-buscador data-modo="{{ modo }}"
+      data-indice="{{ indice }}" data-base="{{ url('') }}">
+  <label class="b-etiqueta" for="b-q">Busca una licitación</label>
+  <div class="b-campos">
+    <input class="b-q" id="b-q" type="search" name="q" placeholder="Ej.: computadoras, Arequipa, LP-ABR-7-2026"
+           autocomplete="off" spellcheck="false" enterkeyhint="search" maxlength="120" aria-describedby="b-ayuda">
+    <select class="b-sel" name="objeto" aria-label="Tipo de contratación">
+      <option value="">Todos los tipos</option>
+      {% for o in objetos %}{% if o.n %}<option value="{{ o.slug }}">{{ o.nombre }} ({{ miles(o.n) }})</option>{% endif %}{% endfor %}
+    </select>
+    <select class="b-sel" name="dep" aria-label="Departamento">
+      <option value="">Todo el Perú</option>
+      {% for d in departamentos %}<option value="{{ d.slug }}">{{ d.nombre }} ({{ miles(d.n) }})</option>{% endfor %}
+    </select>
+    <button class="b-boton" type="submit">Buscar</button>
+  </div>
+  <p class="b-ayuda" id="b-ayuda">Por lo que se compra, la entidad, el lugar, la nomenclatura o el rubro. No importan las mayúsculas ni las tildes.</p>
+</form>
+{% endmacro %}

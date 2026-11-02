@@ -129,6 +129,12 @@ INFO.append({"slug": "glosario", "title": "Glosario de licitaciones: bases integ
              "desc": "Qué significan bases integradas, buena pro, consentimiento, desierto, postor, participante, "
                      "RNP, SEACE y otros términos de las contrataciones públicas, en una línea cada uno."})
 GUIAS = [p for p in INFO if p["slug"].startswith(("como-", "etapas-", "glosario"))]
+# Buscador: índice JSON que static/buscar.js filtra en el navegador (GitHub Pages no tiene servidor).
+# Cada aviso es una lista en este orden; "palabras" son las de la descripción, ítems, provincia,
+# distrito y rubro, sin tildes, sin repetir y sin las que ya están en la entidad, el qué o la nomenclatura.
+CAMPOS_INDICE = ["slug", "entidad", "que", "monto", "objeto", "tipo", "dep", "consultas_fin", "nomenclatura",
+                 "convocatoria", "palabras"]
+PALABRAS_VACIAS = set("de la el los las del en y a al para por con o u e su sus que se un una n nro".split())
 ADSENSE = "ca-pub-6522291453297769"  # anuncios automáticos de AdSense (cuenta del dominio toca.pe)
 
 
@@ -236,6 +242,12 @@ def de_articulo(entidad: str) -> str:
     """'de la Municipalidad...', 'del Ministerio...' (nunca 'de el')."""
     con = con_articulo(entidad)
     return "del " + con[3:] if con.startswith("el ") else "de " + con
+
+
+def palabras_busqueda(texto: str | None) -> list[str]:
+    """'CONSTRUCCIÓN de Pistas, LP-ABR-7-2026' -> ['construccion', 'de', 'pistas', 'lp-abr-7-2026'].
+    Igual que buscar.js: minúsculas, sin tildes, y nomenclaturas o siglas (a.h, lp-abr-7) enteras."""
+    return re.findall(r"[a-z0-9]+(?:[-/.][a-z0-9]+)*", T._sin_tildes(texto or "").lower())
 
 
 # ---------------------------------------------------------------- estado
@@ -426,6 +438,24 @@ class Sitio:
                         return out
         return out
 
+    def indice_busqueda(self) -> dict:
+        """Solo los vigentes, en el orden de los listados (los que cierran consultas antes, primero)."""
+        nombres_rubro = {r["slug"]: r["nombre"] for r in T.RUBROS}
+        filas = []
+        for a in self.vigentes:
+            ya = set(palabras_busqueda(f"{a['entidad_txt']} {a['corta']} {a['nomenclatura']}"))
+            texto = " ".join([a["descripcion"], a.get("provincia") or "", a.get("distrito") or ""]
+                             + [i.get("descripcion") or "" for i in a.get("items") or []]
+                             + [nombres_rubro[r] for r in a["rubros"]])
+            palabras = [w for w in dict.fromkeys(palabras_busqueda(texto))
+                        if w not in PALABRAS_VACIAS and w not in ya and (len(w) > 2 or w.isdigit())]
+            filas.append([a["slug"], a["entidad_txt"], a["corta"], a["monto_txt"], a.get("objeto") or "",
+                          a.get("tipo") or "", a["dep_slug"], (a.get("consultas_fin") or "")[:10], a["nomenclatura"],
+                          a.get("convocatoria_n") or 1, " ".join(palabras)])
+        return {"generado": self.generado, "campos": CAMPOS_INDICE,
+                "deps": {a["dep_slug"]: a["dep_txt"] for a in self.vigentes},
+                "objetos": {o["slug"]: nombre for nombre, o in OBJETOS.items()}, "avisos": filas}
+
     # -- JSON-LD
     def demanda(self, a: dict) -> dict:
         """schema.org/Demand: "anuncio público de una organización que busca
@@ -495,6 +525,12 @@ def construir(sitio: Sitio, out: Path) -> None:
     rubros = sorted((r for r in rubros if r["n"]), key=lambda r: -r["n"])
     rangos = [{**r, "n": len(sitio.por_rango.get(r["slug"], [])), "path": f"/monto/{r['slug']}/"} for r in RANGOS]
     actualizado = datetime.fromisoformat(sitio.generado)
+    # ?v= con el hash del contenido: un aviso nuevo o un cambio en el JS no se queda en la caché.
+    indice = json.dumps(sitio.indice_busqueda(), ensure_ascii=False, separators=(",", ":"))
+    version = lambda texto: hashlib.sha1(texto.encode()).hexdigest()[:10]  # noqa: E731
+    js = (HERE / "static" / "buscar.js").read_text(encoding="utf-8")
+    env.globals.update(
+        indice_url=sitio.url(f"/buscar/indice.json?v={version(indice)}"), buscar_js=sitio.url(f"/buscar.js?v={version(js)}"))
     env.globals.update(
         url=sitio.url, abs=sitio.abs, anio=sitio.anio, ld_json=ld_json, miles=miles, plural=plural,
         fecha_larga=fecha_larga, fecha_corta=fecha_corta, soles=soles, departamentos=departamentos,
@@ -568,7 +604,11 @@ def construir(sitio: Sitio, out: Path) -> None:
              h1="Licitaciones del Estado peruano para tu empresa",
              semana=semana[:PORTADA_ULTIMAS], n_semana=len(semana), resumen=r_all,
              ld=[{"@context": "https://schema.org", "@type": "WebSite", "name": MARCA,
-                  "url": sitio.abs("/"), "inLanguage": "es-PE"},
+                  "url": sitio.abs("/"), "inLanguage": "es-PE",
+                  "potentialAction": {"@type": "SearchAction",
+                                      "target": {"@type": "EntryPoint",
+                                                 "urlTemplate": sitio.abs("/buscar/") + "?q={search_term_string}"},
+                                      "query-input": "required name=search_term_string"}},
                  {"@context": "https://schema.org", "@type": "Organization", "name": MARCA,
                   "url": sitio.abs("/")}])
 
@@ -789,6 +829,13 @@ def construir(sitio: Sitio, out: Path) -> None:
                   "integración de bases y la presentación de ofertas. Esas fechas no vienen en los datos "
                   "abiertos; están en el cronograma de cada ficha.",
             extra={"tipo": "semana"})
+
+    # Buscador: noindex (cada búsqueda sería una página delgada) y fuera de los sitemaps.
+    escribir("/buscar/", "buscar.html", False, titulo=con_marca("Buscar licitaciones del Estado"),
+             h1="Buscar licitaciones", descripcion=f"Busca entre las {miles(len(sitio.vigentes))} licitaciones "
+             "vigentes del SEACE por lo que se compra, la entidad, el lugar, la nomenclatura o el rubro.",
+             migas=[("Inicio", "/"), ("Buscar", None)], ld=[])
+    (out / "buscar" / "indice.json").write_text(indice, encoding="utf-8")
 
     # Páginas informativas
     for p in INFO:

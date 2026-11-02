@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% from "_tarjeta.html" import tarjeta %}
+{% from "_buscador.html" import buscador %}
 {% block contenido %}
 <section class="heroe">
   <h1>{{ h1 }}</h1>
   <p class="heroe-sub">Hoy hay <strong>{{ miles(total_vigentes) }} licitaciones vigentes</strong> en el Perú; <strong>{{ miles(n_semana) }}</strong> cierran consultas en los próximos 7 días.</p>
+  {{ buscador('portada', indice_url) }}
+  <section class="b-zona" id="b-zona" aria-labelledby="b-titulo" hidden>
+    <h2 id="b-titulo">Resultados de tu búsqueda</h2>
+    <p class="b-estado" id="b-estado" role="status" aria-live="polite"></p>
+    <div class="rejilla" id="b-resultados" data-nivel="3"></div>
+    <p class="mas" id="b-mas" hidden><a href="{{ url('/buscar/') }}">Ver todos los resultados</a></p>
+  </section>
   <ul class="atajos">
     {% for o in objetos %}{% if o.n %}<li><a href="{{ url(o.path) }}">{{ o.nombre }} <span>{{ miles(o.n) }}</span></a></li>{% endif %}{% endfor %}
   </ul>
@@ -54,3 +62,4 @@
   <p class="bloque-nota">Muchas licitaciones de bienes y servicios no publican su monto en los datos abiertos; esas no aparecen aquí.</p>
 </section>
 {% endblock %}
+{% block scripts %}<script src="{{ buscar_js }}" defer></script>{% endblock %}

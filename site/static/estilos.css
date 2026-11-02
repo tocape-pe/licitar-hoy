@@ -33,6 +33,15 @@ main{padding-bottom:32px}
 .cab-nav a{flex:1;display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 6px;color:#fff;font-size:.9rem;font-weight:600;text-align:center;text-decoration:none}
 .cab-nav a:hover{background:#ffffff1a}
 .cab :focus-visible,.pie :focus-visible{outline-color:var(--acento)}
+/* Buscador del encabezado: en el celular, fila propia bajo la marca; en escritorio ancho, entre la marca y el menú */
+.cab-buscar{order:1;display:flex;gap:6px;width:100%;padding:0 0 10px}
+.cab-nav{order:2}
+.cab-buscar input,.b-q,.b-sel{min-width:0;border-radius:6px;background:var(--caja);color:var(--tinta);font:inherit}
+.cab-buscar input,.b-q{-webkit-appearance:none;appearance:none}
+.cab-buscar input{flex:1;min-height:44px;padding:0 12px;border:1px solid #ffffff59;font-size:1rem}
+.cab-buscar button,.b-boton{min-height:44px;padding:0 16px;border:0;border-bottom:4px solid #0003;border-radius:6px;background:var(--acento);color:var(--sobre-acento);font:inherit;font-weight:800;cursor:pointer}
+.cab-buscar button:hover,.b-boton:hover{filter:brightness(1.08)}
+::placeholder{color:var(--mute);opacity:1}
 
 .migas{padding:12px 0 4px;font-size:.88rem;color:var(--mute)}
 .migas ol{list-style:none;display:flex;flex-wrap:wrap;gap:2px 0}
@@ -50,6 +59,20 @@ main{padding-bottom:32px}
 .atajos a:hover{background:var(--pri);color:var(--papel)}
 .atajos a:hover span{color:inherit}
 
+/* Buscador grande (portada y /buscar/) */
+.buscador{max-width:60rem;margin:16px 0;padding:14px;background:var(--caja);border:1px solid var(--linea);border-radius:6px}
+.b-etiqueta{display:block;margin:0 0 6px;font-weight:800}
+.b-campos{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.b-q,.b-sel{width:100%;min-height:48px;border:2px solid var(--pri)}
+.b-q{grid-column:1/-1;padding:0 12px;font-size:1.05rem}
+.b-sel{padding:0 6px;font-size:.95rem}
+.b-boton{grid-column:1/-1;min-height:48px;font-size:1.05rem}
+.b-ayuda{margin:8px 0 0;font-size:.88rem;color:var(--mute)}
+.b-zona{margin:8px 0 24px}
+.b-zona>h2{margin:0;padding-bottom:6px;border-bottom:3px solid var(--tinta)}
+.b-estado{margin:12px 0 0;font-weight:700}
+.b-estado:empty{display:none}
+.b-mas{padding:0 22px;background:var(--caja);color:var(--pri);border:2px solid var(--pri);border-bottom-width:4px}
 .bloque{margin-top:32px}
 .bloque>h2{padding-bottom:6px;border-bottom:3px solid var(--tinta)}
 .bloque-nota{max-width:68ch;font-size:.92rem;color:var(--mute)}
@@ -166,8 +189,9 @@ main{padding-bottom:32px}
 .pie .pie-contacto{display:inline-flex;align-items:center;min-height:44px;margin-top:4px;padding:8px 18px;border-radius:6px;background:var(--acento);color:var(--sobre-acento);font-weight:800;text-decoration:none}
 
 @media(min-width:600px){.deps,.pie-deps{grid-template-columns:repeat(3,1fr)}.atajos{display:flex;flex-wrap:wrap}.atajos a{padding:6px 18px}}
-@media(min-width:760px){h1{font-size:2rem}.heroe h1{font-size:2.5rem;max-width:26ch}.aviso h1{font-size:2rem}.cab-fila{flex-wrap:nowrap}.cab-nav{width:auto;border:0}.cab-nav a{flex:none;padding:0 16px;font-size:.95rem}.deps,.pie-deps{grid-template-columns:repeat(4,1fr)}.heroe{padding-top:36px}.a-claves{grid-template-columns:repeat(4,1fr)}.a-claves div:nth-child(-n+2){grid-column:span 2}.a-claves div:nth-child(n+3){grid-column:auto}.a-claves div:nth-child(5),.a-claves div:nth-child(6){grid-column:span 2}.boton{display:inline-flex;min-width:340px}}
+@media(min-width:760px){h1{font-size:2rem}.heroe h1{font-size:2.5rem;max-width:26ch}.aviso h1{font-size:2rem}.cab-buscar{order:3}.b-campos{grid-template-columns:minmax(0,1fr) 190px 190px auto}.b-q,.b-boton{grid-column:auto}.cab-nav{width:auto;border:0}.cab-nav a{flex:none;padding:0 16px;font-size:.95rem}.deps,.pie-deps{grid-template-columns:repeat(4,1fr)}.heroe{padding-top:36px}.a-claves{grid-template-columns:repeat(4,1fr)}.a-claves div:nth-child(-n+2){grid-column:span 2}.a-claves div:nth-child(n+3){grid-column:auto}.a-claves div:nth-child(5),.a-claves div:nth-child(6){grid-column:span 2}.boton{display:inline-flex;min-width:340px}}
+@media(min-width:1080px){.cab-fila{flex-wrap:nowrap}.cab-buscar{order:1;flex:1;max-width:380px;padding:0}}
 @media(prefers-reduced-motion:no-preference){.tarjeta,.t-ver,.deps a{transition:background .12s,border-color .12s}}
-@media print{.cab-nav,.pie,.saltar{display:none}}
+@media print{.cab-nav,.cab-buscar,.buscador,.pie,.saltar{display:none}}
 .glosario dt{margin-top:16px;font-weight:800}
 .glosario dd{margin:4px 0 0}

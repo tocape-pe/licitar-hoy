@@ -31,6 +31,14 @@
 <header class="cab">
   <div class="envoltura cab-fila">
     <a class="marca" href="{{ url('/') }}" aria-label="{{ marca }}, inicio"><b>Licitar <span>Hoy</span></b></a>
+    {# La portada y /buscar/ ya tienen el buscador grande justo debajo: no se repite aquí. #}
+    {% if path not in ('/', '/buscar/') %}
+    <form class="cab-buscar" action="{{ url('/buscar/') }}" method="get" role="search">
+      <label class="oculto" for="cab-q">Buscar licitaciones</label>
+      <input id="cab-q" type="search" name="q" placeholder="Buscar licitaciones" autocomplete="off" enterkeyhint="search" maxlength="120">
+      <button type="submit">Buscar</button>
+    </form>
+    {% endif %}
     <nav class="cab-nav" aria-label="Principal">
       <a href="{{ url('/esta-semana/') }}">Esta semana</a>
       <a href="{{ url('/adjudicadas/') }}">Adjudicadas</a>
