@@ -158,6 +158,8 @@ def test_indice_de_busqueda(tmp_path):
     assert "/buscar/" not in "".join(p.read_text(encoding="utf-8") for p in pub.glob("sitemap*.xml"))
     portada = (pub / "index.html").read_text(encoding="utf-8")
     assert '"@type":"SearchAction"' in portada
+    # La búsqueda principal ("licitaciones perú") va al inicio del título y del H1
+    assert "<title>Licitaciones Perú 2026" in portada and "<h1>Licitaciones en Perú" in portada
     assert '"urlTemplate":"https://licitarhoy.toca.pe/buscar/?q={search_term_string}"' in portada
     assert (pub / "buscar.js").exists()
     aviso = next((pub / "licitacion").glob("*1261357/index.html")).read_text(encoding="utf-8")

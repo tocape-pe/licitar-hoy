@@ -596,21 +596,25 @@ def construir(sitio: Sitio, out: Path) -> None:
 
     # Portada
     r_all = sitio.resumen(sitio.vigentes)
+    # "licitaciones perú" es la búsqueda principal: va al inicio del título, la descripción y el H1.
     escribir("/", "portada.html", True, sitio.vigentes[0]["lastmod"] if sitio.vigentes else None,
-             titulo=f"Licitaciones SEACE hoy {sitio.anio}: obras, bienes y servicios | {MARCA}",
-             descripcion=armar([f"{plural(len(sitio.vigentes), 'licitación vigente', 'licitaciones vigentes')} "
-                                "publicadas en el SEACE, para pymes y proveedores, ordenadas por fecha límite de consultas.",
-                                f"Datos abiertos del OECE al {hoy_txt}."]),
-             h1="Licitaciones del Estado peruano para tu empresa",
+             titulo=f"Licitaciones Perú {sitio.anio}: SEACE hoy, obras, bienes y servicios",
+             descripcion=armar([f"Licitaciones en Perú: {plural(len(sitio.vigentes), 'convocatoria vigente', 'convocatorias vigentes')} "
+                                "del SEACE de obras, bienes, servicios y consultorías, ordenadas por fecha límite.",
+                                "Gratis y sin registro.", f"Actualizado el {hoy_txt}."]),
+             h1="Licitaciones en Perú para tu empresa",
              semana=semana[:PORTADA_ULTIMAS], n_semana=len(semana), resumen=r_all,
              ld=[{"@context": "https://schema.org", "@type": "WebSite", "name": MARCA,
+                  "alternateName": "Licitar Hoy: licitaciones del Perú",
                   "url": sitio.abs("/"), "inLanguage": "es-PE",
                   "potentialAction": {"@type": "SearchAction",
                                       "target": {"@type": "EntryPoint",
                                                  "urlTemplate": sitio.abs("/buscar/") + "?q={search_term_string}"},
                                       "query-input": "required name=search_term_string"}},
                  {"@context": "https://schema.org", "@type": "Organization", "name": MARCA,
-                  "url": sitio.abs("/")}])
+                  "url": sitio.abs("/"), "logo": sitio.abs("/icon-192.png"), "email": CONTACTO,
+                  "description": "Licitaciones del Estado peruano tomadas de los datos abiertos del OECE, "
+                                 "gratis y sin registro.", "areaServed": {"@type": "Country", "name": "Perú"}}])
 
     # Avisos (vigentes indexables; cerrados con noindex y sin datos estructurados).
     # Misma entidad y misma descripción en varios procedimientos: el título lleva

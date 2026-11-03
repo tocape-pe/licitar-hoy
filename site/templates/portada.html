@@ -4,7 +4,7 @@
 {% block contenido %}
 <section class="heroe">
   <h1>{{ h1 }}</h1>
-  <p class="heroe-sub">Hoy hay <strong>{{ miles(total_vigentes) }} licitaciones vigentes</strong> en el Perú; <strong>{{ miles(n_semana) }}</strong> cierran consultas en los próximos 7 días.</p>
+  <p class="heroe-sub">Hoy hay <strong>{{ miles(total_vigentes) }} licitaciones del Estado vigentes</strong> en el Perú; <strong>{{ miles(n_semana) }}</strong> cierran consultas en los próximos 7 días.</p>
   {{ buscador('portada', indice_url) }}
   <section class="b-zona" id="b-zona" aria-labelledby="b-titulo" hidden>
     <h2 id="b-titulo">Resultados de tu búsqueda</h2>
@@ -15,7 +15,7 @@
   <ul class="atajos">
     {% for o in objetos %}{% if o.n %}<li><a href="{{ url(o.path) }}">{{ o.nombre }} <span>{{ miles(o.n) }}</span></a></li>{% endif %}{% endfor %}
   </ul>
-  <p class="heroe-texto">Licitaciones, concursos y subastas de municipalidades, gobiernos regionales, hospitales y ministerios, tomadas de los datos abiertos del OECE y actualizadas cada día. Cada una enlaza a su ficha oficial. Para participar necesitas estar inscrito en el RNP y registrarte en el SEACE dentro del plazo.</p>
+  <p class="heroe-texto">Licitaciones públicas, concursos y subastas de todo el Perú: municipalidades, gobiernos regionales, hospitales y ministerios, tomadas de los datos abiertos del OECE (SEACE) y actualizadas cada día. Cada una enlaza a su ficha oficial. Para participar necesitas estar inscrito en el RNP y registrarte en el SEACE dentro del plazo.</p>
 </section>
 
 <section class="bloque">
@@ -41,25 +41,37 @@
 </section>
 
 <section class="bloque">
-  <h2>Por rubro</h2>
+  <h2>Licitaciones por rubro</h2>
   <ul class="deps">
     {% for r in rubros %}<li><a href="{{ url(r.path) }}">{{ r.nombre }} <span>{{ miles(r.n) }}</span></a></li>{% endfor %}
   </ul>
 </section>
 
 <section class="bloque">
-  <h2>Por departamento</h2>
+  <h2>Licitaciones por departamento</h2>
   <ul class="deps">
     {% for d in departamentos %}<li><a href="{{ url(d.path) }}">{{ d.nombre }} <span>{{ miles(d.n) }}</span></a></li>{% endfor %}
   </ul>
 </section>
 
 <section class="bloque">
-  <h2>Por monto publicado</h2>
+  <h2>Licitaciones por monto publicado</h2>
   <ul class="deps">
     {% for r in rangos %}<li><a href="{{ url(r.path) }}">{{ r.nombre }} <span>{{ miles(r.n) }}</span></a></li>{% endfor %}
   </ul>
   <p class="bloque-nota">Muchas licitaciones de bienes y servicios no publican su monto en los datos abiertos; esas no aparecen aquí.</p>
+</section>
+
+<section class="bloque faq">
+  <h2>Preguntas frecuentes sobre las licitaciones en Perú</h2>
+  <h3>¿Dónde se publican las licitaciones del Estado peruano?</h3>
+  <p>En el SEACE, el sistema de contrataciones del OECE. Ahí las entidades publican la convocatoria, las bases, el cronograma y la buena pro. {{ marca }} toma esas convocatorias de los datos abiertos del OECE y las ordena por fecha límite de consultas; cada una enlaza a su ficha oficial.</p>
+  <h3>¿Qué necesito para participar en una licitación?</h3>
+  <p>Tener inscripción vigente en el Registro Nacional de Proveedores (RNP) en el registro que corresponda (bienes, servicios u obras) y registrarte como participante en el SEACE dentro del plazo. Lo explicamos paso a paso en <a href="{{ url('/como-inscribirse-en-el-rnp/') }}">cómo inscribirse en el RNP</a> y <a href="{{ url('/como-participar-en-una-licitacion/') }}">cómo participar en una licitación</a>.</p>
+  <h3>¿Están todas las licitaciones del Perú?</h3>
+  <p>Están los procedimientos convocados que publica la API de datos abiertos del OECE: licitaciones públicas, concursos públicos, subastas inversas y comparaciones de precios. No están las contrataciones menores (de hasta 8 UIT), que no vienen en esos datos, ni los convenios y contrataciones directas, que no son abiertas a cualquier proveedor.</p>
+  <h3>¿Cuánto cuesta y cada cuánto se actualiza?</h3>
+  <p>Es gratis y no pide cuenta ni datos personales. Las licitaciones se actualizan cada día, en cuanto el OECE publica sus datos. Busca por lo que vendes, por tu región o por <a href="{{ url('/esta-semana/') }}">las que cierran esta semana</a>.</p>
 </section>
 {% endblock %}
 {% block scripts %}<script src="{{ buscar_js }}" defer></script>{% endblock %}

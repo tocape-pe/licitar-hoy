@@ -76,6 +76,8 @@ main{padding-bottom:32px}
 .bloque{margin-top:32px}
 .bloque>h2{padding-bottom:6px;border-bottom:3px solid var(--tinta)}
 .bloque-nota{max-width:68ch;font-size:.92rem;color:var(--mute)}
+.faq h3{margin:18px 0 4px}
+.faq p{max-width:68ch}
 .rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,310px),1fr));gap:12px;margin-top:12px}
 
 /* Tarjeta: entidad, qué se compra, monto, objeto y tipo, plazo. Toda es un enlace. */
