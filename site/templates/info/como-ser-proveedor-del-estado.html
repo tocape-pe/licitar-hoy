@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block contenido %}
+<article class="texto">
+<h1>{{ h1 }}</h1>
+<p>Municipalidades, gobiernos regionales, hospitales, colegios y ministerios compran todos los días: útiles, alimentos, uniformes, limpieza, vigilancia, transporte, mantenimiento y obras. Para venderles no necesitas ser una empresa grande ni tener contactos. Necesitas estar en regla y presentarte a tiempo. Esta guía resume qué te piden para ser proveedor del Estado y en qué orden.</p>
+
+<h2>En 4 pasos</h2>
+<ol>
+  <li><strong>Ten tu RUC activo y habido</strong> en la SUNAT.</li>
+  <li><strong>Inscríbete en el RNP</strong> (Registro Nacional de Proveedores) del OECE, en el registro de lo que vas a ofrecer.</li>
+  <li><strong>Entra al SEACE como proveedor</strong> con tu RUC y tu clave RNP.</li>
+  <li><strong>Busca licitaciones de tu rubro</strong> y regístrate como participante en cada una, dentro del plazo.</li>
+</ol>
+
+<h2>¿Quién puede ser proveedor del Estado?</h2>
+<ul>
+  <li><strong>Personas naturales con RUC</strong> (RUC 10): por ejemplo, alguien con un negocio propio o un profesional independiente que presta servicios.</li>
+  <li><strong>Empresas</strong> (RUC 20) inscritas en la SUNARP, cuyo objeto social corresponda a lo que ofrecen.</li>
+  <li><strong>Consorcios</strong> de dos o más proveedores inscritos, cuando las bases del procedimiento lo permiten.</li>
+  <li><strong>Extranjeros:</strong> los domiciliados en el Perú siguen el mismo camino; los no domiciliados tramitan el RNP por la mesa de partes digital del OECE.</li>
+</ul>
+<p>No pueden contratar quienes tienen una sanción vigente de inhabilitación ni quienes están en alguno de los impedimentos de la Ley de Contrataciones Públicas (Ley 32069), por ejemplo por cargos públicos o parentesco con funcionarios de la entidad. Si tienes dudas sobre tu caso, revísalo antes de ofertar.</p>
+
+<h2>Paso 1: tu RUC en regla</h2>
+<p>Verifica en la consulta RUC de la SUNAT que tu RUC figure como <strong>activo</strong> y <strong>habido</strong>, y que tu domicilio fiscal, actividad y representantes estén al día. El RNP cruza esos datos: si algo no coincide, el trámite se traba.</p>
+
+<h2>Paso 2: la inscripción en el RNP</h2>
+<p>Es el registro que te habilita para contratar con el Estado. Se hace por internet en el portal del RNP: pagas la tasa (S/&nbsp;29 si eres persona natural, S/&nbsp;46 si eres empresa, para bienes, servicios o ambos), envías un formulario electrónico y el RNP lo revisa en un máximo de 2 días hábiles. Para obras hay registros aparte, con más requisitos. Te lo explicamos con detalle en <a href="{{ url('/como-inscribirse-en-el-rnp/') }}">cómo inscribirse en el RNP</a>.</p>
+
+<h2>Paso 3: tu acceso al SEACE</h2>
+<p>El <strong>SEACE</strong> es el sistema donde las entidades publican sus convocatorias y donde los proveedores se registran como participantes, hacen consultas y presentan ofertas. Como proveedor entras con tu <strong>RUC como usuario y tu clave RNP como contraseña</strong>. La clave llega en el voucher de pago de tu primera inscripción.</p>
+
+<h2>Paso 4: encuentra licitaciones que puedas atender</h2>
+<p>Las convocatorias salen en el SEACE. En {{ marca }} tomamos esas mismas convocatorias de los datos abiertos del OECE y las ordenamos para que encuentres rápido las tuyas:</p>
+<ul>
+  <li><a href="{{ url('/rubro/') }}">Por rubro</a>: limpieza, alimentos, construcción, tecnología, uniformes y más.</li>
+  <li><a href="{{ url('/departamento/') }}">Por departamento</a>, para ver lo que se compra cerca de ti.</li>
+  <li><a href="{{ url('/monto/') }}">Por monto</a>, para empezar por contratos de tu tamaño.</li>
+  <li><a href="{{ url('/esta-semana/') }}">Las que cierran consultas esta semana</a>, para no llegar tarde.</li>
+</ul>
+<p>Cada aviso enlaza a su ficha oficial, donde están las bases y el cronograma. El paso a paso para presentarte está en <a href="{{ url('/como-participar-en-una-licitacion/') }}">cómo participar en una licitación</a>, y el significado de cada etapa en <a href="{{ url('/etapas-de-una-licitacion/') }}">las etapas de una licitación</a>.</p>
+
+<h2>Otras formas de venderle al Estado</h2>
+<ul>
+  <li><strong>Compras de monto pequeño:</strong> no pasan por un procedimiento de selección; la entidad pide cotizaciones directamente a proveedores. No aparecen en {{ marca }}, pero muchas entidades igual te piden RNP vigente, así que la inscripción también te sirve ahí.</li>
+  <li><strong>Catálogos electrónicos de Perú Compras:</strong> para productos y servicios estandarizados, las entidades compran a proveedores incorporados a los acuerdos marco. Para entrar hay que postular en las convocatorias que publica Perú Compras.</li>
+</ul>
+
+<h2>Lo que te pedirán si ganas</h2>
+<ul>
+  <li><strong>Los documentos para firmar el contrato</strong> que indiquen las bases, dentro del plazo que ahí se fija.</li>
+  <li><strong>Garantías</strong>, en los contratos que las exigen: las bases dicen cuáles y por cuánto.</li>
+  <li><strong>Una cuenta bancaria a nombre de tu RUC</strong>, con su código de cuenta interbancario (CCI), porque las entidades pagan por transferencia.</li>
+</ul>
+
+<h2>Consejos si recién empiezas</h2>
+<ul>
+  <li><strong>Inscríbete en el RNP antes de necesitarlo.</strong> Los plazos para registrarte como participante son cortos.</li>
+  <li><strong>Empieza por montos chicos</strong> y de tu zona: cada contrato que cumples es experiencia que luego puedes acreditar.</li>
+  <li><strong>Guarda tus comprobantes</strong> (contratos, órdenes de compra, facturas): son la forma de demostrar experiencia en las bases.</li>
+  <li><strong>Desconfía</strong> de quien te cobre por «asegurarte» una buena pro. Nadie puede garantizarte un contrato.</li>
+</ul>
+
+{% include "_faq.html" %}
+<p class="nota">Guía informativa revisada el {{ fecha_larga(revisado) }}. Los requisitos de cada procedimiento están en sus bases y los del RNP en las fichas oficiales del OECE en gob.pe. {{ marca }} no es el OECE ni una entidad del Estado.</p>
+</article>
+{% endblock %}

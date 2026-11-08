@@ -111,10 +111,55 @@ INFO = [
      "lastmod": "2026-10-30",
      "desc": f"{MARCA} no pide datos personales. Anuncios de Google AdSense y visitas contadas sin cookies."},
     # Guías propias para proveedores (enlazadas desde la portada y el pie)
-    {"slug": "como-inscribirse-en-el-rnp", "title": "Cómo inscribirse en el RNP: guía para proveedores del Estado",
-     "h1": "Cómo inscribirse en el RNP para venderle al Estado", "indexable": True, "lastmod": "2026-10-30",
-     "desc": "Qué es el Registro Nacional de Proveedores, qué registro te toca (bienes, servicios u obras), "
-             "qué necesitas antes de empezar y cómo es el trámite, paso a paso."},
+    # Montos, plazos y horarios del RNP: fichas oficiales gob.pe/22006 y gob.pe/22007
+    # (último cambio 29-oct-2026). Si cambian allá, cambiar aquí, en la plantilla y el lastmod.
+    {"slug": "como-inscribirse-en-el-rnp", "title": "Cómo inscribirse en el RNP 2026: requisitos, costo y pasos",
+     "h1": "Cómo inscribirse en el RNP con tu RUC, paso a paso", "indexable": True, "lastmod": "2026-11-08",
+     "desc": "Inscríbete en el RNP del OECE (antes OSCE) con tu RUC: S/ 29 persona natural, S/ 46 empresa, "
+             "aprobación en hasta 2 días hábiles. Requisitos y pasos.",
+     "faq": [
+         ("¿Puedo sacar el RNP solo con mi RUC?",
+          "Sí. El trámite se hace con tu número de RUC, que debe estar activo y habido en la SUNAT. No necesitas "
+          "tener una empresa: una persona natural con RUC también puede inscribirse. Si eres empresa, además debes "
+          "estar inscrita en la SUNARP y tu objeto social debe corresponder a lo que vas a ofrecer."),
+         ("¿Cuánto cuesta inscribirse en el RNP?",
+          "Para bienes, para servicios o para bienes y servicios juntos, la tasa es S/ 29 si eres persona natural "
+          "y S/ 46 si eres persona jurídica, según la ficha oficial del OECE en gob.pe. Los registros de ejecutor "
+          "y consultor de obras tienen otra tasa y más requisitos."),
+         ("¿Cuánto demora la inscripción en el RNP?",
+          "Si pagas por Págalo.pe, el formulario se habilita dentro de las 48 horas. Una vez enviado, el RNP lo "
+          "revisa en un plazo máximo de 2 días hábiles; si todo está bien, la aprobación es automática. Si hay "
+          "observaciones, tienes 2 días hábiles para corregirlas, una sola vez."),
+         ("¿La inscripción en el RNP vence?",
+          "La inscripción como proveedor de bienes o servicios ya no se renueva cada año: tiene vigencia "
+          "indeterminada, siempre que mantengas tus datos actualizados y tu RUC siga activo y habido."),
+         ("¿Es lo mismo registrarse en el OSCE que en el OECE?",
+          "Sí. Con la Ley 32069 el OSCE pasó a llamarse OECE (Organismo Especializado para las Contrataciones "
+          "Públicas Eficientes). El Registro Nacional de Proveedores es el mismo y se tramita en el portal del RNP."),
+         ("¿Cómo entro al SEACE después de inscribirme?",
+          "Como proveedor entras al SEACE con tu RUC como usuario y tu clave RNP como contraseña. La clave viene "
+          "en el voucher de pago la primera vez que te inscribes; si la olvidas, puedes recuperarla en el portal "
+          "del RNP."),
+     ]},
+    {"slug": "como-ser-proveedor-del-estado", "title": "Cómo ser proveedor del Estado en Perú: requisitos 2026",
+     "h1": "Cómo ser proveedor del Estado en Perú", "indexable": True, "lastmod": "2026-11-08",
+     "desc": "Qué necesitas para venderle al Estado peruano: RUC activo y habido, inscripción en el RNP, acceso "
+             "al SEACE y dónde encontrar las licitaciones de tu rubro.",
+     "faq": [
+         ("¿Necesito una empresa para ser proveedor del Estado?",
+          "No. Una persona natural con RUC activo y habido puede inscribirse en el RNP y venderle al Estado. "
+          "Una empresa también puede, siempre que esté inscrita en la SUNARP y su objeto social corresponda a lo "
+          "que ofrece."),
+         ("¿Cuánto cuesta ser proveedor del Estado?",
+          "La inscripción en el RNP como proveedor de bienes o servicios cuesta S/ 29 para personas naturales y "
+          "S/ 46 para personas jurídicas. Registrarte como participante en un procedimiento del SEACE es gratuito."),
+         ("¿Dónde veo las licitaciones a las que me puedo presentar?",
+          "Las convocatorias se publican en el SEACE. En Licitar Hoy las mismas licitaciones vigentes se pueden "
+          "ver por rubro, por departamento y por monto, con enlace a la ficha oficial de cada una."),
+         ("¿Inscribirme en el RNP me inscribe en las licitaciones?",
+          "No. El RNP te habilita para contratar con el Estado, pero en cada procedimiento tienes que registrarte "
+          "como participante en el SEACE, dentro del plazo de su cronograma."),
+     ]},
     {"slug": "como-participar-en-una-licitacion", "title": "Cómo participar en una licitación del Estado siendo pyme",
      "h1": "Cómo participar en una licitación del Estado siendo pyme", "indexable": True, "lastmod": "2026-10-30",
      "desc": "De encontrar la licitación a firmar el contrato: RNP, bases, registro de participantes, consultas, "
@@ -843,9 +888,16 @@ def construir(sitio: Sitio, out: Path) -> None:
 
     # Páginas informativas
     for p in INFO:
+        ld = [sitio.breadcrumbs([("Inicio", "/"), (p["h1"], None)])]
+        # "S/ 29" sin partirse al final de la línea
+        faq = [(q, r.replace("S/ ", "S/ ")) for q, r in p.get("faq") or []]
+        if faq:  # el mismo texto se ve en la página (templates/_faq.html)
+            ld.append({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": r}}
+                for q, r in faq]})
         escribir(f"/{p['slug']}/", f"info/{p['slug']}.html", p["indexable"], p["lastmod"],
                  titulo=p["title"], h1=p["h1"], descripcion=p["desc"], revisado=p["lastmod"],
-                 migas=[("Inicio", "/"), (p["h1"], None)], ld=[sitio.breadcrumbs([("Inicio", "/"), (p["h1"], None)])])
+                 faq=faq, migas=[("Inicio", "/"), (p["h1"], None)], ld=ld)
 
     # 404 (GitHub Pages la sirve desde la raíz del proyecto)
     html = env.get_template("404.html").render(path="/404.html", canonical=sitio.abs("/404.html"), indexable=False,

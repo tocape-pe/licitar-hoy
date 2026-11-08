@@ -1,0 +1,8 @@
+{# Preguntas frecuentes de una guía: el texto sale de INFO[...]["faq"] en build.py, el mismo que va al JSON-LD FAQPage. #}
+{% if faq %}
+<h2>Preguntas frecuentes</h2>
+{% for pregunta, respuesta in faq %}
+<h3>{{ pregunta }}</h3>
+<p>{{ respuesta }}</p>
+{% endfor %}
+{% endif %}
