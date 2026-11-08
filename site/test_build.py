@@ -1,4 +1,5 @@
 import json
+import re
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -113,6 +114,9 @@ def test_construye_sitio_completo(tmp_path):
     assert "contratacionesabiertas.oece.gob.pe/proceso/ocds-dgv273-seacev3-1261357" in html
     cerrado = next((pub / "licitacion").glob("*1259973/index.html")).read_text(encoding="utf-8")
     assert 'content="noindex' in cerrado and '"@type":"Demand"' not in cerrado
+    # El título completo se ve en la ficha; solo <title> lleva tope
+    titulo = re.search(r"<h1[^>]*>(.*?)</h1>", html).group(1)
+    assert len(titulo) > 80 and not titulo.endswith("…") and len(re.search(r"<title>(.*?)</title>", html).group(1)) <= 70
     adjudicado = next((pub / "licitacion").glob("*9999999/index.html")).read_text(encoding="utf-8")
     assert 'content="index' in adjudicado and "Empresa de Prueba" in adjudicado  # "quién ganó" se indexa
     assert '"@type":"Demand"' not in adjudicado

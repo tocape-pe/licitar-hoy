@@ -254,7 +254,7 @@ ABREVIATURAS_SLUG = [
 ]
 
 
-COLGANTES = {"de", "del", "la", "las", "el", "los", "y", "e", "o", "en", "a", "al", "para", "con", "n"}
+COLGANTES = {"de", "del", "la", "las", "el", "los", "y", "e", "o", "en", "a", "al", "para", "con", "n", "mediante", "por", "según", "sin"}
 
 
 def _recortar_slug(s: str, maximo: int) -> str:
@@ -293,10 +293,10 @@ _ARRANQUE = re.compile(
     r"OBRA\s*:\s*|DENOMINAD[OA]\s*:?\s*|SOLO\s+|[\"'“”:;.\-]+\s*)")
 
 
-def descripcion_corta(descripcion: str, maximo: int = 60) -> str:
+def descripcion_corta(descripcion: str, maximo: int | None = 60) -> str:
     """'CONTRATACIÓN PARA LA EJECUCIÓN DE LA OBRA: CREACIÓN DE PISTAS…' ->
     'creación de pistas…' en minúscula inicial, para 'Licitación de …'.
-    Corta en una palabra completa, sin dejar 'de'/'y' colgando."""
+    Corta en una palabra completa, sin dejar 'de'/'y' colgando; maximo=None no corta."""
     t = limpiar(descripcion)
     base = _sin_tildes(t).upper()
     while True:
@@ -305,7 +305,7 @@ def descripcion_corta(descripcion: str, maximo: int = 60) -> str:
             break
         t, base = t[m.end():], base[m.end():]
     t = capitalizar_lugares(oracion(re.sub(r'["“”]', "", t).strip())) or oracion(limpiar(descripcion))
-    if len(t) > maximo:
+    if maximo is not None and len(t) > maximo:
         palabras = t[:maximo + 1].split(" ")[:-1]
         while palabras and palabras[-1].lower().strip(",;:") in COLGANTES:
             palabras.pop()
@@ -371,7 +371,7 @@ def rubros(codigos_unspsc: list[str]) -> list[str]:
 
 # Palabras frecuentes en descripciones de compras públicas que la fuente trae sin tilde.
 TILDES.update({
-    "consultoria": "consultoría", "electricas": "eléctricas", "electricos": "eléctricos",
+    "movil": "móvil", "moviles": "móviles", "consultoria": "consultoría", "electricas": "eléctricas", "electricos": "eléctricos",
     "electronicos": "electrónicos", "electronica": "electrónica", "areas": "áreas", "area": "área",
     "asfaltico": "asfáltico", "asfaltica": "asfáltica", "farmaceutico": "farmacéutico",
     "farmaceuticos": "farmacéuticos", "farmaceutica": "farmacéutica", "farmaceuticas": "farmacéuticas",

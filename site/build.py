@@ -411,7 +411,8 @@ class Sitio:
         prov = T.nombre_propio(a.get("provincia") or "")
         p["lugar_txt"] = p["dep_txt"] if not prov or prov.upper() == p["dep_txt"].upper() else f"{prov}, {p['dep_txt']}"
         p["descripcion_txt"] = T.capitalizar_lugares(T.oracion(T.limpiar(a["descripcion"])))
-        p["corta"] = T.descripcion_corta(a["descripcion"])
+        p["corta"] = T.descripcion_corta(a["descripcion"])  # para <title> y la URL, que tienen tope
+        p["que"] = T.descripcion_corta(a["descripcion"], maximo=None)  # lo que se lee en la página: completo
         p["monto_txt"] = soles(a.get("monto"))
         p["rango"] = next((r["slug"] for r in RANGOS if a.get("monto") and r["min"] < a["monto"] <= r["max"]), None)
         p["rubros"] = T.rubros([i.get("unspsc") for i in a.get("items") or []])
@@ -488,13 +489,13 @@ class Sitio:
         nombres_rubro = {r["slug"]: r["nombre"] for r in T.RUBROS}
         filas = []
         for a in self.vigentes:
-            ya = set(palabras_busqueda(f"{a['entidad_txt']} {a['corta']} {a['nomenclatura']}"))
+            ya = set(palabras_busqueda(f"{a['entidad_txt']} {a['que']} {a['nomenclatura']}"))
             texto = " ".join([a["descripcion"], a.get("provincia") or "", a.get("distrito") or ""]
                              + [i.get("descripcion") or "" for i in a.get("items") or []]
                              + [nombres_rubro[r] for r in a["rubros"]])
             palabras = [w for w in dict.fromkeys(palabras_busqueda(texto))
                         if w not in PALABRAS_VACIAS and w not in ya and (len(w) > 2 or w.isdigit())]
-            filas.append([a["slug"], a["entidad_txt"], a["corta"], a["monto_txt"], a.get("objeto") or "",
+            filas.append([a["slug"], a["entidad_txt"], a["que"], a["monto_txt"], a.get("objeto") or "",
                           a.get("tipo") or "", a["dep_slug"], (a.get("consultas_fin") or "")[:10], a["nomenclatura"],
                           a.get("convocatoria_n") or 1, " ".join(palabras)])
         return {"generado": self.generado, "campos": CAMPOS_INDICE,
@@ -688,7 +689,7 @@ def construir(sitio: Sitio, out: Path) -> None:
         if idx_ent and not a["cerrado"]:
             migas.append((a["entidad_txt"], f"/entidad/{a['entidad_slug']}/"))
         migas.append((a["nomenclatura"], None))
-        h1 = f"Licitación de {a['corta']}"
+        h1 = f"Licitación de {a['que']}"
         # Las cerradas con ganador se indexan: "quién ganó" es lo que se busca de ellas.
         con_ganador = a["cerrado"] and bool(a["adjudicaciones_txt"])
         if con_ganador:

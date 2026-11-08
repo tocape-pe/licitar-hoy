@@ -6,7 +6,7 @@
   <p class="aviso-cerrado">Este procedimiento ya no está en convocatoria{% if a.estado %}: figura como <strong>{{ a.estado|lower }}</strong>{% endif %}. Se conserva como referencia.</p>
   {% endif %}
   <p class="a-entidad">{% if entidad_indexable.get(a.entidad_slug) and not a.cerrado %}<a href="{{ url('/entidad/' ~ a.entidad_slug ~ '/') }}">{{ a.entidad_txt }}</a>{% else %}{{ a.entidad_txt }}{% endif %}</p>
-  <h1>{{ h1 }}</h1>
+  <h1{% if h1|length > 90 %} class="h1-largo"{% endif %}>{{ h1 }}</h1>
 
   {% if a.cerrado and a.adjudicaciones_txt %}{% set g = a.adjudicaciones_txt[0] %}
   <p class="a-ganador"><span>Buena pro</span><strong>{{ g.proveedor_txt }}</strong>{% if g.ruc %} <small>RUC {{ g.ruc }}</small>{% endif %}{% if g.monto_txt %} <b>{{ g.monto_txt }}</b>{% endif %}{% if a.adjudicaciones_txt|length > 1 %} <small>y {{ plural(a.adjudicaciones_txt|length - 1, 'adjudicación más', 'adjudicaciones más') }} (abajo)</small>{% endif %}</p>
