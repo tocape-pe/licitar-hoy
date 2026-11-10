@@ -7,6 +7,8 @@
 {% if descripcion %}<meta name="description" content="{{ descripcion }}">{% endif %}
 <link rel="canonical" href="{{ canonical }}">
 <meta name="robots" content="{{ 'index,follow,max-snippet:-1,max-image-preview:large' if indexable else 'noindex,follow' }}">
+{# 9-nov-2026: fichas individuales fuera del índice de Google (miles de páginas casi iguales); Bing/ChatGPT las siguen viendo #}
+{% if indexable and (path or '').startswith('/licitacion/') %}<meta name="googlebot" content="noindex,follow">{% endif %}
 <meta name="theme-color" content="#14284b">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">

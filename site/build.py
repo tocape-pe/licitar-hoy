@@ -959,7 +959,7 @@ def verificar(sitio: Sitio, out: Path) -> list[str]:
         html = f.read_text(encoding="utf-8")
         if '"@type":"JobPosting"' in html:
             problemas.append(f"JobPosting en {f}: este sitio no publica empleos")
-        if 'content="noindex' in html and '"@type":"Demand"' in html:
+        if 'name="robots" content="noindex' in html and '"@type":"Demand"' in html:
             problemas.append(f"Datos estructurados en una página noindex: {f}")
         t = re.search(r"<title>(.*?)</title>", html, re.S)
         if t and 'content="index' in html:
