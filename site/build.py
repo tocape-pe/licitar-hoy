@@ -932,19 +932,26 @@ def escribir_sitemaps(sitio: Sitio, out: Path) -> None:
     listados = [p for p in indexables if p not in avisos and p not in info]
     archivos = []
 
-    def guardar(nombre, grupo):
+    def guardar(nombre, grupo, lista):
         (out / nombre).write_text(urlset(grupo), encoding="utf-8")
-        archivos.append((nombre, max((p["lastmod"] for p in grupo if p.get("lastmod")), default=None)))
+        lista.append((nombre, max((p["lastmod"] for p in grupo if p.get("lastmod")), default=None)))
 
+    def indice(nombre, lista):
+        (out / nombre).write_text(
+            '<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+            + "".join(f"<sitemap><loc>{sitio.abs('/' + a)}</loc>" + (f"<lastmod>{lm}</lastmod>" if lm else "")
+                      + "</sitemap>" for a, lm in lista)
+            + "</sitemapindex>\n", encoding="utf-8")
+
+    # 11-nov-2026: las fichas (googlebot noindex desde el 9-nov) salen del sitemap.xml que lee Google;
+    # quedan en sitemap-fichas.xml, sin enlazar en robots.txt, por si se avisa a Bing.
+    fichas = []
     for i in range(0, max(1, len(avisos)), 2000):
-        guardar(f"sitemap-avisos-{i // 2000 + 1}.xml", avisos[i:i + 2000])
-    guardar("sitemap-listados.xml", listados)
-    guardar("sitemap-info.xml", info)
-    (out / "sitemap.xml").write_text(
-        '<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-        + "".join(f"<sitemap><loc>{sitio.abs('/' + a)}</loc>" + (f"<lastmod>{lm}</lastmod>" if lm else "")
-                  + "</sitemap>" for a, lm in archivos)
-        + "</sitemapindex>\n", encoding="utf-8")
+        guardar(f"sitemap-avisos-{i // 2000 + 1}.xml", avisos[i:i + 2000], fichas)
+    guardar("sitemap-listados.xml", listados, archivos)
+    guardar("sitemap-info.xml", info, archivos)
+    indice("sitemap.xml", archivos)
+    indice("sitemap-fichas.xml", fichas)
     if not sitio.base_path:
         (out / "robots.txt").write_text(
             f"User-agent: *\nAllow: /\n\nSitemap: {sitio.abs('/sitemap.xml')}\n", encoding="utf-8")

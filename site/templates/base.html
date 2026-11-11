@@ -74,7 +74,7 @@
     <p class="pie-fuente">Datos del <a href="{{ fuente_url }}" rel="noopener">{{ fuente }}</a> (licencia <a href="{{ licencia_url }}" rel="noopener license">CC BY 4.0</a>), procesados por {{ marca }} y actualizados el {{ actualizado_txt }}. {{ marca }} no es el OECE ni una entidad del Estado, no cobra y no pide datos personales. Verifica siempre en la ficha oficial.</p>
     <h2 class="pie-titulo">Guías para proveedores</h2>
     <p class="pie-links">{% for g in guias %}{{ ' · ' if not loop.first }}<a href="{{ url('/' ~ g.slug ~ '/') }}">{{ g.h1 }}</a>{% endfor %}</p>
-    <p class="pie-links"><a href="{{ url('/acerca/') }}">Acerca</a> · <a href="{{ url('/aviso-legal/') }}">Aviso legal</a> · <a href="{{ url('/privacidad/') }}">Privacidad</a> · <a href="https://chambearhoy.toca.pe/">Trabajos en el Estado (Chamba al Toque)</a></p>
+    <p class="pie-links"><a href="{{ url('/acerca/') }}">Acerca</a> · <a href="{{ url('/aviso-legal/') }}">Aviso legal</a> · <a href="{{ url('/privacidad/') }}">Privacidad</a></p>
     <p><a class="pie-contacto" href="https://toca.pe/#contacto">Contacto</a></p>
   </div>
 </footer>
